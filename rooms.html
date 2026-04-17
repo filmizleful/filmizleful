@@ -3,171 +3,248 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Odalar - Filmizleful</title>
+<title>Online Odalar - Filmizleful</title>
+
 <style>
 body{
     margin:0;
-    font-family:Arial,sans-serif;
-    background:radial-gradient(circle at top,#1b1b2f,#09090f 70%);
+    font-family:Arial, sans-serif;
+    background: radial-gradient(circle at top, #1b1b2f, #09090f 70%);
     color:white;
     min-height:100vh;
-    padding:30px 20px;
-    box-sizing:border-box;
 }
+
+.ustbar{
+    background:#111;
+    padding:16px 24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.logo{
+    font-size:26px;
+    font-weight:bold;
+    color:#e50914;
+}
+
+.ustbar a{
+    color:white;
+    text-decoration:none;
+    background:#262626;
+    padding:10px 14px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
 .sayfa{
-    max-width:1100px;
+    max-width:1200px;
     margin:0 auto;
+    padding:35px 20px 50px;
 }
-.baslik{
+
+.hero{
     text-align:center;
-    margin-bottom:30px;
+    margin-bottom:28px;
 }
-.baslik h1{
+
+.hero h1{
     margin:0 0 10px 0;
-    font-size:42px;
+    font-size:44px;
 }
-.baslik p{
+
+.hero p{
     margin:0;
-    color:#ccc;
+    color:#cfcfcf;
     font-size:18px;
 }
-.kutu{
+
+.isim-kutu{
     background:rgba(255,255,255,0.05);
     border:1px solid rgba(255,255,255,0.08);
     border-radius:20px;
-    padding:25px;
-    box-sizing:border-box;
+    padding:22px;
     margin-bottom:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.25);
 }
-input{
-    width:100%;
+
+.isim-kutu h2{
+    margin:0 0 14px 0;
+    font-size:26px;
+}
+
+.isim-alani{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.isim-alani input{
+    flex:1;
+    min-width:240px;
     padding:14px;
-    margin-top:12px;
     border:none;
     border-radius:12px;
     background:#1b1b1b;
     color:white;
     font-size:16px;
-    box-sizing:border-box;
 }
-button{
-    width:100%;
-    margin-top:16px;
-    padding:14px;
+
+.isim-alani button{
+    padding:14px 20px;
     border:none;
     border-radius:12px;
     background:#e50914;
     color:white;
-    font-size:16px;
     font-weight:bold;
     cursor:pointer;
 }
-button:hover{
+
+.isim-alani button:hover{
     background:#ff1e2d;
 }
+
 .uyari{
-    margin-top:14px;
+    margin-top:12px;
     font-size:14px;
-    text-align:center;
-    color:#ff9090;
+    color:#ffb3b3;
 }
+
 .oda-baslik{
-    font-size:24px;
+    font-size:28px;
     font-weight:bold;
-    margin-bottom:16px;
+    margin:18px 0 18px;
 }
+
 .odalar{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:18px;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    gap:20px;
 }
+
 .oda-kart{
-    display:block;
     text-decoration:none;
     color:white;
-    background:#151515;
-    border-radius:16px;
-    padding:22px;
+    border-radius:18px;
+    padding:24px 18px;
     text-align:center;
     transition:0.3s;
-    border:1px solid rgba(255,255,255,0.05);
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+    border:1px solid rgba(255,255,255,0.06);
 }
+
 .oda-kart:hover{
     transform:scale(1.05);
 }
+
 .oda-ikon{
-    font-size:42px;
+    font-size:46px;
     margin-bottom:12px;
 }
+
 .oda-ad{
-    font-size:22px;
+    font-size:24px;
     font-weight:bold;
     margin-bottom:8px;
 }
+
 .oda-aciklama{
+    color:#f0f0f0;
     font-size:15px;
-    color:#ddd;
+    line-height:1.5;
 }
-.korku:hover{ box-shadow:0 0 22px rgba(255,0,0,0.5); }
-.aksiyon:hover{ box-shadow:0 0 22px rgba(255,120,0,0.5); }
-.bilim:hover{ box-shadow:0 0 22px rgba(138,125,255,0.6); }
-.macera:hover{ box-shadow:0 0 22px rgba(255,213,74,0.5); }
-.genel:hover{ box-shadow:0 0 22px rgba(0,200,255,0.45); }
+
+.genel{
+    background:linear-gradient(180deg,#4dc8ff,#1573d6);
+}
+.korku{
+    background:linear-gradient(180deg,#ff5f5f,#b8001f);
+}
+.aksiyon{
+    background:linear-gradient(180deg,#ff9a3d,#ff4d00);
+}
+.bilim{
+    background:linear-gradient(180deg,#8d7bff,#562bff);
+}
+.macera{
+    background:linear-gradient(180deg,#ffd85b,#ff9f1a);
+    color:#111;
+}
+.macera .oda-aciklama{
+    color:#222;
+}
+
+.alt-bilgi{
+    margin-top:28px;
+    text-align:center;
+    color:#bfbfbf;
+    font-size:14px;
+}
 </style>
 </head>
 <body>
 
+<div class="ustbar">
+    <div class="logo">💬 Filmizleful Odalar</div>
+    <a href="index.html">← Ana Sayfa</a>
+</div>
+
 <div class="sayfa">
 
-    <div class="baslik">
-        <h1>💬 Online Odalar</h1>
-        <p>İsmini yaz ve hazır odalardan birine gir.</p>
+    <div class="hero">
+        <h1>Online İzleme Odaları</h1>
+        <p>İsmini yaz, oda seç ve arkadaşlarınla birlikte sohbete katıl.</p>
     </div>
 
-    <div class="kutu">
-        <div class="oda-baslik">👤 Önce İsmini Yaz</div>
+    <div class="isim-kutu">
+        <h2>👤 İsmini Kaydet</h2>
 
-        <input type="text" id="isim" placeholder="Adın">
-
-        <button onclick="ismiKaydet()">İsmi Kaydet</button>
+        <div class="isim-alani">
+            <input type="text" id="isim" placeholder="Adın">
+            <button onclick="ismiKaydet()">Kaydet</button>
+        </div>
 
         <div class="uyari" id="uyari"></div>
     </div>
 
-    <div class="kutu">
-        <div class="oda-baslik">🚪 Hazır Odalar</div>
+    <div class="oda-baslik">🚪 Hazır Odalar</div>
 
-        <div class="odalar">
-            <a href="#" class="oda-kart genel" onclick="odayaGit('genel')">
-                <div class="oda-ikon">🌐</div>
-                <div class="oda-ad">Genel Oda</div>
-                <div class="oda-aciklama">Herkes için genel sohbet odası</div>
-            </a>
+    <div class="odalar">
+        <a href="#" class="oda-kart genel" onclick="odayaGit('genel')">
+            <div class="oda-ikon">🌐</div>
+            <div class="oda-ad">Genel Oda</div>
+            <div class="oda-aciklama">Herkesin girebildiği genel sohbet ve izleme odası</div>
+        </a>
 
-            <a href="#" class="oda-kart korku" onclick="odayaGit('korku')">
-                <div class="oda-ikon">👻</div>
-                <div class="oda-ad">Korku Odası</div>
-                <div class="oda-aciklama">Korku filmleri sevenler için</div>
-            </a>
+        <a href="#" class="oda-kart korku" onclick="odayaGit('korku')">
+            <div class="oda-ikon">👻</div>
+            <div class="oda-ad">Korku Odası</div>
+            <div class="oda-aciklama">Korku filmi sevenler için özel oda</div>
+        </a>
 
-            <a href="#" class="oda-kart aksiyon" onclick="odayaGit('aksiyon')">
-                <div class="oda-ikon">🔥</div>
-                <div class="oda-ad">Aksiyon Odası</div>
-                <div class="oda-aciklama">Aksiyon sevenler burada</div>
-            </a>
+        <a href="#" class="oda-kart aksiyon" onclick="odayaGit('aksiyon')">
+            <div class="oda-ikon">🔥</div>
+            <div class="oda-ad">Aksiyon Odası</div>
+            <div class="oda-aciklama">Aksiyon ve heyecan sevenler burada buluşur</div>
+        </a>
 
-            <a href="#" class="oda-kart bilim" onclick="odayaGit('bilimkurgu')">
-                <div class="oda-ikon">🚀</div>
-                <div class="oda-ad">Bilim Kurgu Odası</div>
-                <div class="oda-aciklama">Uzay, gelecek ve teknoloji</div>
-            </a>
+        <a href="#" class="oda-kart bilim" onclick="odayaGit('bilimkurgu')">
+            <div class="oda-ikon">🚀</div>
+            <div class="oda-ad">Bilim Kurgu</div>
+            <div class="oda-aciklama">Uzay, gelecek ve teknoloji meraklıları için</div>
+        </a>
 
-            <a href="#" class="oda-kart macera" onclick="odayaGit('macera')">
-                <div class="oda-ikon">🗺️</div>
-                <div class="oda-ad">Macera Odası</div>
-                <div class="oda-aciklama">Macera ve keşif odası</div>
-            </a>
-        </div>
+        <a href="#" class="oda-kart macera" onclick="odayaGit('macera')">
+            <div class="oda-ikon">🗺️</div>
+            <div class="oda-ad">Macera Odası</div>
+            <div class="oda-aciklama">Keşif, yolculuk ve eğlenceli filmler için</div>
+        </a>
+    </div>
+
+    <div class="alt-bilgi">
+        Odaya girmeden önce ismini kaydetmen gerekir.
     </div>
 
 </div>
@@ -183,12 +260,13 @@ function ismiKaydet() {
     const uyari = document.getElementById("uyari");
 
     if (!isim) {
-        uyari.textContent = "Önce adını yazman lazım.";
+        uyari.style.color = "#ffb3b3";
+        uyari.textContent = "Önce ismini yazman gerekiyor.";
         return;
     }
 
     localStorage.setItem("filmizleful_isim", isim);
-    uyari.style.color = "#8cffb0";
+    uyari.style.color = "#90ffb2";
     uyari.textContent = "İsmin kaydedildi. Artık odalara girebilirsin.";
 }
 
@@ -197,8 +275,8 @@ function odayaGit(oda) {
     const uyari = document.getElementById("uyari");
 
     if (!isim) {
-        uyari.style.color = "#ff9090";
-        uyari.textContent = "Odaya girmeden önce adını yaz.";
+        uyari.style.color = "#ffb3b3";
+        uyari.textContent = "Odaya girmeden önce ismini yaz.";
         return;
     }
 
