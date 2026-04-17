@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Giriş - Filmizleful</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#0b0b14;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.box{
+    background:#111827;
+    padding:30px;
+    border-radius:15px;
+    width:300px;
+    text-align:center;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border:none;
+    border-radius:8px;
+}
+
+button{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    background:#ff4d6d;
+    color:white;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>👤 Giriş Yap</h2>
+
+    <input type="text" id="kullanici" placeholder="Kullanıcı adı">
+    <button onclick="giris()">Giriş Yap</button>
+</div>
+
+<script>
+function giris(){
+    let ad = document.getElementById("kullanici").value;
+
+    if(ad == ""){
+        alert("İsim yaz!");
+        return;
+    }
+
+    localStorage.setItem("kullanici", ad);
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
