@@ -3,63 +3,143 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oda - Filmizleful</title>
+<title>Oda Chat + Video</title>
+
 <style>
 body{
     margin:0;
-    font-family:Arial,sans-serif;
-    background:radial-gradient(circle at top,#1b1b2f,#09090f 70%);
+    font-family:Arial, sans-serif;
+    background:#0c0c14;
     color:white;
 }
+
 .ust{
     background:#111;
-    padding:16px 24px;
+    padding:15px 20px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    flex-wrap:wrap;
-}
-.logo{
-    font-size:26px;
-    font-weight:bold;
-    color:#e50914;
-}
-.icerik{
-    max-width:1000px;
-    margin:0 auto;
-    padding:30px 20px;
-}
-.kutu{
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.08);
-    border-radius:20px;
-    padding:24px;
-}
-h1{
-    margin-top:0;
-}
-.satir{
-    margin-top:12px;
-    color:#ddd;
-    font-size:18px;
-}
-.butonlar{
-    margin-top:24px;
-    display:flex;
     gap:12px;
     flex-wrap:wrap;
 }
-a, button{
+
+.ust a{
+    color:white;
     text-decoration:none;
+    background:#2a2a2a;
+    padding:10px 14px;
+    border-radius:10px;
+}
+
+.sayfa{
+    max-width:1100px;
+    margin:auto;
+    padding:20px;
+}
+
+.video-kutu{
+    background:#151515;
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:20px;
+}
+
+.video-baslik{
+    font-size:24px;
+    font-weight:bold;
+    margin-bottom:14px;
+}
+
+.video-kontrol{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:14px;
+}
+
+.video-kontrol input{
+    flex:1;
+    min-width:260px;
+    padding:12px;
     border:none;
+    border-radius:10px;
+    background:#222;
+    color:white;
+}
+
+.video-kontrol button{
+    padding:12px 18px;
+    border:none;
+    border-radius:10px;
     background:#e50914;
     color:white;
-    padding:12px 18px;
-    border-radius:12px;
-    font-weight:bold;
     cursor:pointer;
+    font-weight:bold;
 }
-a:hover, button:hover{
+
+.video-kontrol button:hover{
+    background:#ff1e2d;
+}
+
+.oynatici{
+    width:100%;
+    aspect-ratio:16 / 9;
+    border-radius:14px;
+    overflow:hidden;
+    background:#000;
+}
+
+.oynatici iframe{
+    width:100%;
+    height:100%;
+    border:0;
+}
+
+.chat{
+    background:#151515;
+    border-radius:18px;
+    padding:18px;
+}
+
+.mesajlar{
+    height:350px;
+    overflow-y:auto;
+    background:#1a1a1a;
+    padding:15px;
+    border-radius:15px;
+}
+
+.mesaj{
+    margin-bottom:10px;
+    line-height:1.5;
+}
+
+.input{
+    margin-top:12px;
+    display:flex;
+    gap:10px;
+}
+
+.input input{
+    flex:1;
+    padding:12px;
+    border-radius:10px;
+    border:none;
+    background:#222;
+    color:white;
+}
+
+.input button{
+    padding:12px 20px;
+    border:none;
+    border-radius:10px;
+    background:#e50914;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.input button:hover{
     background:#ff1e2d;
 }
 </style>
@@ -67,38 +147,160 @@ a:hover, button:hover{
 <body>
 
 <div class="ust">
-    <div class="logo">🎬 Filmizleful Oda</div>
-    <a href="rooms.html">← Odalara Dön</a>
+    <div id="odaAdi">Oda</div>
+    <a href="rooms.html">← Geri</a>
 </div>
 
-<div class="icerik">
-    <div class="kutu">
-        <h1 id="odaBaslik">Oda</h1>
-        <div class="satir" id="isimYazi"></div>
-        <div class="satir">Bu ilk sürüm. Sonraki adımda yazılı chat ekleyeceğiz.</div>
+<div class="sayfa">
 
-        <div class="butonlar">
-            <button onclick="isimDegistir()">İsmi Değiştir</button>
+    <div class="video-kutu">
+        <div class="video-baslik">📺 Ortak Video</div>
+
+        <div class="video-kontrol">
+            <input id="videoLink" placeholder="YouTube linki yapıştır...">
+            <button onclick="videoAyarla()">Videoyu Değiştir</button>
+        </div>
+
+        <div class="oynatici">
+            <iframe id="videoFrame" allowfullscreen></iframe>
         </div>
     </div>
+
+    <div class="chat">
+        <div class="video-baslik">💬 Oda Sohbeti</div>
+
+        <div class="mesajlar" id="mesajlar"></div>
+
+        <div class="input">
+            <input id="mesajInput" placeholder="Mesaj yaz...">
+            <button onclick="gonder()">Gönder</button>
+        </div>
+    </div>
+
 </div>
 
-<script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    onSnapshot,
+    query,
+    orderBy,
+    doc,
+    setDoc,
+    getDoc
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBNoenb7tM6mFK8DEruxFtYLo_FwUXY7uc",
+  authDomain: "filmizleful-chat.firebaseapp.com",
+  projectId: "filmizleful-chat",
+  storageBucket: "filmizleful-chat.firebasestorage.app",
+  messagingSenderId: "873061099685",
+  appId: "1:873061099685:web:aa697ed2baadd453dc454c"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
 const params = new URLSearchParams(window.location.search);
 const oda = params.get("oda") || "genel";
 let isim = localStorage.getItem("filmizleful_isim") || "Misafir";
 
-document.getElementById("odaBaslik").textContent = "📺 Oda: " + oda;
-document.getElementById("isimYazi").textContent = "Katılan kişi: " + isim;
+document.getElementById("odaAdi").textContent = "📺 Oda: " + oda;
 
-function isimDegistir() {
-    const yeniIsim = prompt("Yeni ismini yaz:", isim);
-    if (yeniIsim && yeniIsim.trim()) {
-        isim = yeniIsim.trim();
-        localStorage.setItem("filmizleful_isim", isim);
-        document.getElementById("isimYazi").textContent = "Katılan kişi: " + isim;
+const mesajlarDiv = document.getElementById("mesajlar");
+const videoFrame = document.getElementById("videoFrame");
+const videoInput = document.getElementById("videoLink");
+
+/* CHAT */
+const q = query(collection(db, "rooms", oda, "messages"), orderBy("tarih"));
+
+onSnapshot(q, (snapshot) => {
+    mesajlarDiv.innerHTML = "";
+    snapshot.forEach(docSnap => {
+        const data = docSnap.data();
+        const div = document.createElement("div");
+        div.className = "mesaj";
+        div.innerHTML = "<b>" + data.isim + ":</b> " + data.mesaj;
+        mesajlarDiv.appendChild(div);
+    });
+    mesajlarDiv.scrollTop = mesajlarDiv.scrollHeight;
+});
+
+window.gonder = async function() {
+    const input = document.getElementById("mesajInput");
+    const text = input.value.trim();
+    if (!text) return;
+
+    await addDoc(collection(db, "rooms", oda, "messages"), {
+        isim: isim,
+        mesaj: text,
+        tarih: Date.now()
+    });
+
+    input.value = "";
+};
+
+/* VIDEO */
+function youtubeEmbedYap(link) {
+    try {
+        if (link.includes("youtube.com/watch?v=")) {
+            const url = new URL(link);
+            const id = url.searchParams.get("v");
+            if (id) return "https://www.youtube.com/embed/" + id;
+        }
+
+        if (link.includes("youtu.be/")) {
+            const parcalar = link.split("youtu.be/");
+            const id = parcalar[1]?.split("?")[0];
+            if (id) return "https://www.youtube.com/embed/" + id;
+        }
+
+        if (link.includes("youtube.com/embed/")) {
+            return link;
+        }
+
+        return "";
+    } catch {
+        return "";
     }
 }
+
+const roomDocRef = doc(db, "rooms", oda);
+
+async function varsayilanVideoKontrolEt() {
+    const snap = await getDoc(roomDocRef);
+    if (!snap.exists()) {
+        await setDoc(roomDocRef, {
+            video: "https://www.youtube.com/embed/2AUmvWm5ZDQ"
+        });
+    }
+}
+
+await varsayilanVideoKontrolEt();
+
+onSnapshot(roomDocRef, (snap) => {
+    const data = snap.data();
+    if (data && data.video) {
+        videoFrame.src = data.video;
+    }
+});
+
+window.videoAyarla = async function() {
+    const link = videoInput.value.trim();
+    const embed = youtubeEmbedYap(link);
+
+    if (!embed) {
+        alert("Geçerli bir YouTube linki yapıştır.");
+        return;
+    }
+
+    await setDoc(roomDocRef, { video: embed }, { merge: true });
+    videoInput.value = "";
+};
 </script>
 
 </body>
