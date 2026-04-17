@@ -87,12 +87,22 @@ body{
     border-radius:14px;
     overflow:hidden;
     background:#000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
 .oynatici iframe{
     width:100%;
     height:100%;
     border:0;
+}
+
+.video-bos{
+    color:#bbb;
+    text-align:center;
+    padding:20px;
+    line-height:1.6;
 }
 
 .chat{
@@ -142,6 +152,12 @@ body{
 .input button:hover{
     background:#ff1e2d;
 }
+
+.uyari{
+    margin-top:10px;
+    color:#ff9a9a;
+    font-size:14px;
+}
 </style>
 </head>
 <body>
@@ -161,8 +177,14 @@ body{
             <button onclick="videoAyarla()">Videoyu Değiştir</button>
         </div>
 
-        <div class="oynatici">
-            <iframe id="videoFrame" allowfullscreen></iframe>
+        <div class="uyari" id="videoUyari"></div>
+
+        <div class="oynatici" id="oynaticiAlan">
+            <div class="video-bos" id="videoBosYazi">
+                Henüz video seçilmedi.<br>
+                YouTube linki yapıştırıp "Videoyu Değiştir" butonuna bas.
+            </div>
+            <iframe id="videoFrame" allowfullscreen style="display:none;"></iframe>
         </div>
     </div>
 
@@ -214,6 +236,8 @@ document.getElementById("odaAdi").textContent = "📺 Oda: " + oda;
 const mesajlarDiv = document.getElementById("mesajlar");
 const videoFrame = document.getElementById("videoFrame");
 const videoInput = document.getElementById("videoLink");
+const videoBosYazi = document.getElementById("videoBosYazi");
+const videoUyari = document.getElementById("videoUyari");
 
 /* CHAT */
 const q = query(collection(db, "rooms", oda, "messages"), orderBy("tarih"));
@@ -269,23 +293,37 @@ function youtubeEmbedYap(link) {
     }
 }
 
+function videoGoster(src) {
+    if (src) {
+        videoFrame.src = src;
+        videoFrame.style.display = "block";
+        videoBosYazi.style.display = "none";
+    } else {
+        videoFrame.src = "";
+        videoFrame.style.display = "none";
+        videoBosYazi.style.display = "block";
+    }
+}
+
 const roomDocRef = doc(db, "rooms", oda);
 
-async function varsayilanVideoKontrolEt() {
+async function odaBelgesiKontrolEt() {
     const snap = await getDoc(roomDocRef);
     if (!snap.exists()) {
         await setDoc(roomDocRef, {
-            video: "https://www.youtube.com/embed/2AUmvWm5ZDQ"
+            video: ""
         });
     }
 }
 
-await varsayilanVideoKontrolEt();
+await odaBelgesiKontrolEt();
 
 onSnapshot(roomDocRef, (snap) => {
     const data = snap.data();
-    if (data && data.video) {
-        videoFrame.src = data.video;
+    if (data && typeof data.video !== "undefined") {
+        videoGoster(data.video);
+    } else {
+        videoGoster("");
     }
 });
 
@@ -294,9 +332,11 @@ window.videoAyarla = async function() {
     const embed = youtubeEmbedYap(link);
 
     if (!embed) {
-        alert("Geçerli bir YouTube linki yapıştır.");
+        videoUyari.textContent = "Geçerli bir YouTube linki yapıştır.";
         return;
     }
+
+    videoUyari.textContent = "";
 
     await setDoc(roomDocRef, { video: embed }, { merge: true });
     videoInput.value = "";
