@@ -12,7 +12,6 @@ body{
     background:#0c0c14;
     color:white;
 }
-
 .ust{
     background:#111;
     padding:15px 20px;
@@ -22,30 +21,25 @@ body{
     flex-wrap:wrap;
     gap:10px;
 }
-
 .ust-sol{
     display:flex;
     flex-direction:column;
     gap:5px;
 }
-
 .logo{
     color:#e50914;
     font-size:24px;
     font-weight:bold;
 }
-
 .oda-bilgi{
     color:#ccc;
     font-size:14px;
 }
-
 .rol{
     color:#ffd54a;
     font-size:14px;
     font-weight:bold;
 }
-
 .geri{
     color:white;
     text-decoration:none;
@@ -54,27 +48,23 @@ body{
     border-radius:10px;
     font-weight:bold;
 }
-
 .container{
     display:flex;
     gap:18px;
     padding:20px;
     box-sizing:border-box;
 }
-
 .video-alan{
     flex:2;
     display:flex;
     flex-direction:column;
     gap:12px;
 }
-
 .video-kontrol{
     display:flex;
     gap:10px;
     flex-wrap:wrap;
 }
-
 .video-kontrol input{
     flex:1;
     min-width:220px;
@@ -84,7 +74,6 @@ body{
     background:#1c1c1c;
     color:white;
 }
-
 .video-kontrol button{
     padding:12px 16px;
     border:none;
@@ -94,43 +83,36 @@ body{
     font-weight:bold;
     cursor:pointer;
 }
-
 .video-kontrol button:disabled{
     background:#555;
     cursor:not-allowed;
 }
-
 .video-kutu{
     background:black;
     border-radius:14px;
     overflow:hidden;
     aspect-ratio:16/9;
 }
-
 .video-kutu iframe{
     width:100%;
     height:100%;
     border:none;
 }
-
 .video-durum{
     color:#9fdcff;
     font-size:14px;
     word-break:break-all;
 }
-
 .uyari{
     color:#ff9f9f;
     font-size:14px;
 }
-
 .sag{
     flex:1;
     display:flex;
     flex-direction:column;
     gap:15px;
 }
-
 .online-kutu,
 .chat-kutu,
 .ses-kutu{
@@ -138,7 +120,6 @@ body{
     border-radius:14px;
     padding:14px;
 }
-
 .online-baslik,
 .chat-baslik,
 .ses-baslik{
@@ -146,12 +127,10 @@ body{
     font-weight:bold;
     margin-bottom:10px;
 }
-
 .online-sayi{
     color:#ffd54a;
     margin-bottom:10px;
 }
-
 .online-liste{
     background:#1b1b1b;
     border-radius:10px;
@@ -160,30 +139,25 @@ body{
     max-height:150px;
     overflow-y:auto;
 }
-
 .online-kisi{
     margin-bottom:8px;
     color:#ddd;
 }
-
 .admin-kisi{
     color:#ffd54a;
     font-weight:bold;
 }
-
 .ses-aciklama{
     color:#ccc;
     font-size:14px;
     line-height:1.5;
     margin-bottom:10px;
 }
-
 .ses-butonlar{
     display:flex;
     gap:8px;
     flex-wrap:wrap;
 }
-
 .ses-butonlar button{
     border:none;
     border-radius:10px;
@@ -193,19 +167,16 @@ body{
     font-weight:bold;
     cursor:pointer;
 }
-
 .ses-durum{
     margin-top:10px;
     font-size:14px;
     color:#9fdcff;
 }
-
 .chat-kutu{
     display:flex;
     flex-direction:column;
     height:420px;
 }
-
 .mesajlar{
     flex:1;
     overflow-y:auto;
@@ -214,18 +185,15 @@ body{
     padding:10px;
     margin-bottom:10px;
 }
-
 .mesaj{
     margin-bottom:10px;
     line-height:1.5;
     word-break:break-word;
 }
-
 .input-alan{
     display:flex;
     gap:6px;
 }
-
 .input-alan input{
     flex:1;
     padding:12px;
@@ -234,7 +202,6 @@ body{
     background:#222;
     color:white;
 }
-
 .input-alan button{
     border:none;
     border-radius:10px;
@@ -244,12 +211,10 @@ body{
     font-weight:bold;
     cursor:pointer;
 }
-
 @media(max-width:900px){
     .container{
         flex-direction:column;
     }
-
     .chat-kutu{
         height:360px;
     }
@@ -264,12 +229,10 @@ body{
         <div class="oda-bilgi" id="odaBilgi">Oda</div>
         <div class="rol" id="rolYazi">Rol</div>
     </div>
-
     <a href="rooms.html" class="geri">← Geri</a>
 </div>
 
 <div class="container">
-
     <div class="video-alan">
         <div class="video-kontrol">
             <input id="videoInput" placeholder="YouTube link yapıştır">
@@ -295,7 +258,7 @@ body{
         <div class="ses-kutu">
             <div class="ses-baslik">🎤 Sesli Sohbet</div>
             <div class="ses-aciklama">
-                Butona basınca mikrofon izni ister. Aynı odadaki kişiler birbirini duymayı dener.
+                Butona basınca mikrofon izni ister. Test aşamasındadır.
             </div>
 
             <div class="ses-butonlar">
@@ -308,7 +271,6 @@ body{
 
         <div class="chat-kutu">
             <div class="chat-baslik">💬 Oda Sohbeti</div>
-
             <div class="mesajlar" id="mesajlar"></div>
 
             <div class="input-alan">
@@ -317,7 +279,6 @@ body{
             </div>
         </div>
     </div>
-
 </div>
 
 <script type="module">
@@ -366,6 +327,34 @@ let heartbeatTimer = null;
 let cleanupTimer = null;
 
 const ONLINE_TIMEOUT = 15000;
+
+/* ŞİFRE KONTROL */
+async function sifreKontrol(){
+    const odaDoc = await getDoc(odaRef);
+    if(!odaDoc.exists()) return true;
+
+    const data = odaDoc.data();
+    if(!data.sifreli || !data.sifre) return true;
+
+    const kayitAnahtari = "filmizleful_izin_" + oda;
+    const oncekiIzin = sessionStorage.getItem(kayitAnahtari);
+    if(oncekiIzin === "tamam") return true;
+
+    const girilen = prompt("Bu oda şifreli. Şifreyi gir:");
+    if(girilen !== data.sifre){
+        alert("Şifre yanlış!");
+        window.location.href = "rooms.html";
+        return false;
+    }
+
+    sessionStorage.setItem(kayitAnahtari, "tamam");
+    return true;
+}
+
+const sifreTamam = await sifreKontrol();
+if(!sifreTamam){
+    throw new Error("Şifre doğrulanamadı");
+}
 
 /* VIDEO */
 function youtubeIdBul(link){
@@ -612,155 +601,17 @@ onSnapshot(collection(db, "rooms", oda, "users"), async () => {
     }
 });
 
-/* BASIT WEBRTC SESLI SOHBET */
-let localStream = null;
-let sesBasladi = false;
-let peerConnections = {};
-let remoteAudioEls = {};
-const voiceSignalsRef = collection(db, "rooms", oda, "voiceSignals");
-const rtcConfig = {
-    iceServers: [{ urls: "stun:stun.l.google.com:19302" }]
-};
-
-function sesDurumYaz(metin){
-    document.getElementById("sesDurum").textContent = metin;
-}
-
-async function sinyalGonder(to, data){
-    await addDoc(voiceSignalsRef, {
-        from: kullaniciId,
-        to: to,
-        data: data,
-        zaman: Date.now()
-    });
-}
-
-async function peerOlustur(remoteId, remoteName){
-    if(peerConnections[remoteId]) return peerConnections[remoteId];
-
-    const pc = new RTCPeerConnection(rtcConfig);
-    peerConnections[remoteId] = pc;
-
-    if(localStream){
-        localStream.getTracks().forEach(track => {
-            pc.addTrack(track, localStream);
-        });
-    }
-
-    pc.onicecandidate = async (event) => {
-        if(event.candidate){
-            await sinyalGonder(remoteId, {
-                type: "candidate",
-                candidate: event.candidate
-            });
-        }
-    };
-
-    pc.ontrack = (event) => {
-        if(!remoteAudioEls[remoteId]){
-            const audio = document.createElement("audio");
-            audio.autoplay = true;
-            audio.controls = false;
-            audio.style.display = "none";
-            document.body.appendChild(audio);
-            remoteAudioEls[remoteId] = audio;
-        }
-
-        remoteAudioEls[remoteId].srcObject = event.streams[0];
-    };
-
-    return pc;
-}
-
-window.sesliBaslat = async function(){
-    if(sesBasladi) return;
-
-    try{
-        localStream = await navigator.mediaDevices.getUserMedia({ audio:true, video:false });
-        sesBasladi = true;
-        sesDurumYaz("Sesli sohbet açık. Mikrofon bağlandı.");
-
-        const aktifler = await aktifKullanicilariGetir();
-
-        for(const kisi of aktifler){
-            if(kisi.id === kullaniciId) continue;
-
-            const pc = await peerOlustur(kisi.id, kisi.isim);
-            const offer = await pc.createOffer();
-            await pc.setLocalDescription(offer);
-
-            await sinyalGonder(kisi.id, {
-                type: "offer",
-                sdp: offer
-            });
-        }
-    }catch(e){
-        sesDurumYaz("Mikrofon izni verilmedi veya açılamadı.");
-    }
+/* SESLI SOHBET TEST MESAJI */
+window.sesliBaslat = function(){
+    document.getElementById("sesDurum").textContent = "Sesli sohbet test aşamasında. Her cihazda çalışmayabilir.";
 };
 
 window.sesliDurdur = function(){
-    if(localStream){
-        localStream.getTracks().forEach(track => track.stop());
-        localStream = null;
-    }
-
-    Object.values(peerConnections).forEach(pc => {
-        try{ pc.close(); }catch(e){}
-    });
-    peerConnections = {};
-
-    Object.values(remoteAudioEls).forEach(el => {
-        try{ el.remove(); }catch(e){}
-    });
-    remoteAudioEls = {};
-
-    sesBasladi = false;
-    sesDurumYaz("Sesli sohbet kapalı.");
+    document.getElementById("sesDurum").textContent = "Sesli sohbet kapalı.";
 };
-
-onSnapshot(query(voiceSignalsRef, orderBy("zaman")), async (snap) => {
-    for(const belge of snap.docChanges()){
-        if(belge.type !== "added") continue;
-
-        const sinyal = belge.doc.data();
-        if(sinyal.to !== kullaniciId) continue;
-
-        const fromId = sinyal.from;
-        const data = sinyal.data;
-
-        if(!sesBasladi) continue;
-
-        const pc = await peerOlustur(fromId, fromId);
-
-        if(data.type === "offer"){
-            await pc.setRemoteDescription(new RTCSessionDescription(data.sdp));
-            const answer = await pc.createAnswer();
-            await pc.setLocalDescription(answer);
-
-            await sinyalGonder(fromId, {
-                type: "answer",
-                sdp: answer
-            });
-        }
-
-        if(data.type === "answer"){
-            if(!pc.currentRemoteDescription){
-                await pc.setRemoteDescription(new RTCSessionDescription(data.sdp));
-            }
-        }
-
-        if(data.type === "candidate"){
-            try{
-                await pc.addIceCandidate(new RTCIceCandidate(data.candidate));
-            }catch(e){}
-        }
-    }
-});
 
 window.addEventListener("beforeunload", async () => {
     try{
-        window.sesliDurdur();
         clearInterval(heartbeatTimer);
         clearInterval(cleanupTimer);
         await deleteDoc(kullaniciRef);
