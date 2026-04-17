@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mad Max</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background: radial-gradient(circle at top, #202033, #0c0c14 70%);
+    color:white;
+    min-height:100vh;
+}
+
+.sayfa{
+    max-width:1400px;
+    margin:0 auto;
+    padding:70px 70px 60px;
+}
+
+.ust{
+    display:flex;
+    align-items:flex-start;
+    gap:55px;
+    margin-bottom:70px;
+}
+
+.poster{
+    width:230px;
+    height:300px;
+    border-radius:22px;
+    background:rgba(255,255,255,0.03);
+    box-shadow:0 10px 30px rgba(0,0,0,0.35);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+}
+
+.poster span{
+    font-size:78px;
+}
+
+.bilgi{
+    max-width:820px;
+    padding-top:8px;
+}
+
+.bilgi h1{
+    margin:0 0 22px 0;
+    font-size:64px;
+    line-height:1;
+    font-weight:800;
+}
+
+.meta{
+    font-size:20px;
+    color:#f2f2f2;
+    margin-bottom:22px;
+    font-weight:600;
+}
+
+.ozet{
+    font-size:19px;
+    line-height:1.7;
+    color:#f4f4f4;
+    margin-bottom:28px;
+    max-width:760px;
+}
+
+.butonlar{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+}
+
+.butonlar a{
+    text-decoration:none;
+    color:white;
+    font-size:18px;
+    font-weight:700;
+    padding:14px 24px;
+    border-radius:14px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:170px;
+    transition:0.25s;
+}
+
+.fragman{
+    background:linear-gradient(90deg,#ff9c52,#ff6d3a);
+}
+
+.izle{
+    background:linear-gradient(90deg,#55f3ff,#2ed8d8);
+}
+
+.geri{
+    background:#41445a;
+}
+
+.butonlar a:hover{
+    transform:translateY(-2px) scale(1.02);
+}
+
+.alt{
+    max-width:980px;
+    margin:0 auto;
+}
+
+.hakkinda{
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:22px;
+    padding:28px 30px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.25);
+}
+
+.hakkinda h2{
+    margin:0 0 18px 0;
+    font-size:34px;
+    color:#ffe08a;
+    font-weight:800;
+}
+
+.hakkinda p{
+    margin:0 0 16px 0;
+    font-size:18px;
+    line-height:1.8;
+    color:#f2f2f2;
+}
+
+.hakkinda p:last-child{
+    margin-bottom:0;
+}
+
+@media (max-width:900px){
+    .sayfa{
+        padding:35px 20px 40px;
+    }
+
+    .ust{
+        flex-direction:column;
+        gap:28px;
+        margin-bottom:40px;
+    }
+
+    .poster{
+        width:200px;
+        height:260px;
+    }
+
+    .bilgi h1{
+        font-size:44px;
+    }
+
+    .meta{
+        font-size:17px;
+    }
+
+    .ozet{
+        font-size:17px;
+    }
+
+    .butonlar a{
+        width:100%;
+        min-width:0;
+    }
+
+    .hakkinda h2{
+        font-size:28px;
+    }
+
+    .hakkinda p{
+        font-size:16px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="sayfa">
+
+    <div class="ust">
+        <div class="poster">
+            <span>🔥</span>
+        </div>
+
+        <div class="bilgi">
+            <h1>Mad Max</h1>
+
+            <div class="meta">Aksiyon • Macera • Bilim Kurgu • IMDb 8.1</div>
+
+            <div class="ozet">
+                Mad Max, çölleşmiş bir dünyada hayatta kalma savaşı veren karakterlerin
+                yüksek tempolu kaçış hikayesini anlatır.
+            </div>
+
+            <div class="butonlar">
+                <a href="https://www.youtube.com/watch?v=hEJnMQG9ev8" target="_blank" class="fragman">▶ Fragman izle</a>
+                <a href="https://www.google.com/search?q=Mad+Max+nerede+izlenir" target="_blank" class="izle">📺 Nerede izlenir</a>
+                <a href="aksiyon.html" class="geri">← Geri dön</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="alt">
+        <div class="hakkinda">
+            <h2>🎬 Film Hakkında</h2>
+
+            <p>
+                Mad Max: Fury Road (2015), kıyamet sonrası bir dünyada geçen aksiyon dolu bir filmdir.
+                Max ve Furiosa, zalim bir liderin elinden kaçarken hayatta kalmak için birlikte savaşır.
+            </p>
+
+            <p>
+                Film; hızlı kovalamacaları, çarpıcı görselleri ve durmak bilmeyen aksiyonuyla
+                modern aksiyon sinemasının en güçlü örneklerinden biri olarak görülür.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
