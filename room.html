@@ -280,12 +280,11 @@ const db = getFirestore(app);
 const oda = new URL(window.location.href).searchParams.get("oda") || "genel";
 const isim = localStorage.getItem("filmizleful_isim") || "Misafir";
 const kullaniciId = "k_" + Date.now() + "_" + Math.floor(Math.random() * 100000);
+const odaRef = doc(db, "odalar", oda);
+const kullaniciRef = doc(db, "rooms", oda, "users", kullaniciId);
 
 document.getElementById("odaAdi").innerText = "📺 Oda: " + oda;
 document.getElementById("kullaniciAdi").innerText = "👤 Sen: " + isim;
-
-const odaRef = doc(db, "odalar", oda);
-const kullaniciRef = doc(db, "rooms", oda, "users", kullaniciId);
 
 let player;
 let playerReady = false;
@@ -296,6 +295,10 @@ let adminIsim = "";
 let adminMi = false;
 let bekleyenVideo = "";
 let bekleyenAksiyon = "";
+let heartbeatTimer = null;
+let cleanupTimer = null;
+
+const ONLINE_TIMEOUT = 15000;
 
 window.onYouTubeIframeAPIReady = function () {
     player = new YT.Player("player", {
@@ -368,41 +371,104 @@ function kontrolButonlariniAyarla() {
     }
 }
 
-async function adminiBelirle() {
+async function aktifKullanicilariGetir() {
     const usersQuery = query(collection(db, "rooms", oda, "users"), orderBy("giris"));
     const snap = await getDocs(usersQuery);
+    const simdi = Date.now();
+    const aktifler = [];
 
-    let ilkKisi = null;
-    snap.forEach((docSnap) => {
-        if (!ilkKisi) {
-            ilkKisi = {
+    for (const docSnap of snap.docs) {
+        const data = docSnap.data();
+        const sonGorulme = data.sonGorulme || 0;
+
+        if (simdi - sonGorulme <= ONLINE_TIMEOUT) {
+            aktifler.push({
                 id: docSnap.id,
-                ...docSnap.data()
-            };
+                ...data
+            });
         }
-    });
+    }
 
-    if (ilkKisi) {
+    return aktifler;
+}
+
+async function pasifleriTemizle() {
+    const usersQuery = query(collection(db, "rooms", oda, "users"), orderBy("giris"));
+    const snap = await getDocs(usersQuery);
+    const simdi = Date.now();
+
+    for (const docSnap of snap.docs) {
+        const data = docSnap.data();
+        const sonGorulme = data.sonGorulme || 0;
+
+        if (simdi - sonGorulme > ONLINE_TIMEOUT) {
+            try {
+                await deleteDoc(doc(db, "rooms", oda, "users", docSnap.id));
+            } catch(e) {}
+        }
+    }
+}
+
+async function adminiBelirle() {
+    await pasifleriTemizle();
+    const aktifler = await aktifKullanicilariGetir();
+
+    if (aktifler.length > 0) {
+        const ilkKisi = aktifler[0];
         await setDoc(odaRef, {
             sahipId: ilkKisi.id,
             sahip: ilkKisi.isim
         }, { merge: true });
+    } else {
+        await setDoc(odaRef, {
+            sahipId: "",
+            sahip: ""
+        }, { merge: true });
     }
 }
 
-await setDoc(kullaniciRef, {
-    isim: isim,
-    giris: Date.now()
-});
+async function heartbeatGonder() {
+    await setDoc(kullaniciRef, {
+        isim: isim,
+        giris: Number(kullaniciId.split("_")[1]) || Date.now(),
+        sonGorulme: Date.now()
+    }, { merge: true });
+}
+
+await heartbeatGonder();
 
 const odaSnap = await getDoc(odaRef);
-
 if (!odaSnap.exists() || !odaSnap.data().sahipId) {
     await setDoc(odaRef, {
         sahipId: kullaniciId,
         sahip: isim
     }, { merge: true });
 }
+
+heartbeatTimer = setInterval(async () => {
+    try {
+        await heartbeatGonder();
+    } catch(e) {}
+}, 5000);
+
+cleanupTimer = setInterval(async () => {
+    try {
+        await pasifleriTemizle();
+
+        const odaDoc = await getDoc(odaRef);
+        const aktifler = await aktifKullanicilariGetir();
+
+        const mevcutAdminId = odaDoc.exists() ? (odaDoc.data().sahipId || "") : "";
+        const adminAktifMi = aktifler.some(k => k.id === mevcutAdminId);
+
+        if (!adminAktifMi && aktifler.length > 0) {
+            await setDoc(odaRef, {
+                sahipId: aktifler[0].id,
+                sahip: aktifler[0].isim
+            }, { merge: true });
+        }
+    } catch(e) {}
+}, 6000);
 
 onSnapshot(odaRef, (snap) => {
     if (!snap.exists()) return;
@@ -520,42 +586,45 @@ window.gonder = async function(){
 };
 
 /* ONLINE KİŞİLER */
-onSnapshot(collection(db, "rooms", oda, "users"), (snapshot) => {
+onSnapshot(collection(db, "rooms", oda, "users"), async () => {
+    await pasifleriTemizle();
+    const aktifler = await aktifKullanicilariGetir();
+
     const onlineListe = document.getElementById("onlineListe");
     const onlineSayi = document.getElementById("onlineSayi");
 
     onlineListe.innerHTML = "";
 
-    let sayi = 0;
-
-    snapshot.forEach((docSnap) => {
-        sayi++;
-        const data = docSnap.data();
+    aktifler.forEach((kisi) => {
         const div = document.createElement("div");
-        div.className = "online-kisi" + (docSnap.id === adminId ? " admin-kisi" : "");
-        div.textContent = (docSnap.id === adminId ? "👑 " : "👤 ") + data.isim;
+        div.className = "online-kisi" + (kisi.id === adminId ? " admin-kisi" : "");
+        div.textContent = (kisi.id === adminId ? "👑 " : "👤 ") + kisi.isim;
         onlineListe.appendChild(div);
     });
 
-    onlineSayi.textContent = sayi + " kişi online";
+    onlineSayi.textContent = aktifler.length + " kişi online";
 
-    if (sayi === 0) {
+    if (aktifler.length === 0) {
         onlineListe.innerHTML = "<div class='online-kisi'>Kimse yok</div>";
+    }
+
+    const adminAktifMi = aktifler.some(k => k.id === adminId);
+    if (!adminAktifMi && aktifler.length > 0) {
+        await setDoc(odaRef, {
+            sahipId: aktifler[0].id,
+            sahip: aktifler[0].isim
+        }, { merge: true });
     }
 });
 
-/* ÇIKIŞTA ADMIN DEVİR */
 window.addEventListener("beforeunload", async () => {
     try {
-        const adminBendeyse = adminId === kullaniciId;
-
+        clearInterval(heartbeatTimer);
+        clearInterval(cleanupTimer);
         await deleteDoc(kullaniciRef);
-
-        if (adminBendeyse) {
-            setTimeout(async () => {
-                await adminiBelirle();
-            }, 300);
-        }
+        setTimeout(async () => {
+            await adminiBelirle();
+        }, 300);
     } catch (e) {}
 });
 </script>
