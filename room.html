@@ -132,14 +132,16 @@ body{
 }
 
 .online-kutu,
-.chat-kutu{
+.chat-kutu,
+.ses-kutu{
     background:#151515;
     border-radius:14px;
     padding:14px;
 }
 
 .online-baslik,
-.chat-baslik{
+.chat-baslik,
+.ses-baslik{
     font-size:20px;
     font-weight:bold;
     margin-bottom:10px;
@@ -167,6 +169,35 @@ body{
 .admin-kisi{
     color:#ffd54a;
     font-weight:bold;
+}
+
+.ses-aciklama{
+    color:#ccc;
+    font-size:14px;
+    line-height:1.5;
+    margin-bottom:10px;
+}
+
+.ses-butonlar{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.ses-butonlar button{
+    border:none;
+    border-radius:10px;
+    background:#e50914;
+    color:white;
+    padding:10px 12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.ses-durum{
+    margin-top:10px;
+    font-size:14px;
+    color:#9fdcff;
 }
 
 .chat-kutu{
@@ -261,6 +292,20 @@ body{
             <div class="online-liste" id="onlineListe"></div>
         </div>
 
+        <div class="ses-kutu">
+            <div class="ses-baslik">🎤 Sesli Sohbet</div>
+            <div class="ses-aciklama">
+                Butona basınca mikrofon izni ister. Aynı odadaki kişiler birbirini duymayı dener.
+            </div>
+
+            <div class="ses-butonlar">
+                <button onclick="sesliBaslat()">Sesliyi Başlat</button>
+                <button onclick="sesliDurdur()">Kapat</button>
+            </div>
+
+            <div class="ses-durum" id="sesDurum">Sesli sohbet kapalı.</div>
+        </div>
+
         <div class="chat-kutu">
             <div class="chat-baslik">💬 Oda Sohbeti</div>
 
@@ -322,6 +367,7 @@ let cleanupTimer = null;
 
 const ONLINE_TIMEOUT = 15000;
 
+/* VIDEO */
 function youtubeIdBul(link){
     try{
         if(link.includes("youtu.be/")){
@@ -364,6 +410,78 @@ function rolAyarla(){
     }
 }
 
+window.videoDegistir = async function(){
+    if(!adminMi) return;
+
+    const link = document.getElementById("videoInput").value.trim();
+    const id = youtubeIdBul(link);
+
+    if(!id){
+        document.getElementById("uyari").textContent = "Geçerli bir YouTube linki yapıştır.";
+        return;
+    }
+
+    document.getElementById("uyari").textContent = "";
+
+    await setDoc(odaRef, {
+        videoId: id
+    }, { merge:true });
+
+    document.getElementById("videoInput").value = "";
+};
+
+onSnapshot(odaRef, (snap) => {
+    if(!snap.exists()) return;
+
+    const d = snap.data();
+
+    adminId = d.sahipId || "";
+    adminIsim = d.sahip || "";
+    adminMi = adminId === kullaniciId;
+
+    rolAyarla();
+
+    if(d.videoId){
+        document.getElementById("videoFrame").src = embedLinkYap(d.videoId);
+        document.getElementById("videoDurum").textContent = "Şu an seçili video ID: " + d.videoId;
+    }else{
+        document.getElementById("videoFrame").src = "";
+        document.getElementById("videoDurum").textContent = "Henüz video seçilmedi.";
+    }
+});
+
+/* CHAT */
+const mesajQuery = query(collection(db, "rooms", oda, "messages"), orderBy("tarih"));
+
+onSnapshot(mesajQuery, (snap) => {
+    let html = "";
+    snap.forEach((belge) => {
+        const data = belge.data();
+        const mesajAvatar = data.avatar || "😀";
+        html += `<div class="mesaj"><b>${mesajAvatar} ${data.isim}:</b> ${data.mesaj}</div>`;
+    });
+    document.getElementById("mesajlar").innerHTML = html;
+    const alan = document.getElementById("mesajlar");
+    alan.scrollTop = alan.scrollHeight;
+});
+
+window.mesajGonder = async function(){
+    const input = document.getElementById("mesajInput");
+    const text = input.value.trim();
+
+    if(!text) return;
+
+    await addDoc(collection(db, "rooms", oda, "messages"), {
+        isim: isim,
+        avatar: avatar,
+        mesaj: text,
+        tarih: Date.now()
+    });
+
+    input.value = "";
+};
+
+/* ONLINE / ADMIN */
 async function heartbeatGonder(){
     await setDoc(kullaniciRef, {
         isim: isim,
@@ -463,76 +581,6 @@ cleanupTimer = setInterval(async () => {
     }catch(e){}
 }, 6000);
 
-onSnapshot(odaRef, (snap) => {
-    if(!snap.exists()) return;
-
-    const d = snap.data();
-
-    adminId = d.sahipId || "";
-    adminIsim = d.sahip || "";
-    adminMi = adminId === kullaniciId;
-
-    rolAyarla();
-
-    if(d.videoId){
-        document.getElementById("videoFrame").src = embedLinkYap(d.videoId);
-        document.getElementById("videoDurum").textContent = "Şu an seçili video ID: " + d.videoId;
-    }else{
-        document.getElementById("videoFrame").src = "";
-        document.getElementById("videoDurum").textContent = "Henüz video seçilmedi.";
-    }
-});
-
-window.videoDegistir = async function(){
-    if(!adminMi) return;
-
-    const link = document.getElementById("videoInput").value.trim();
-    const id = youtubeIdBul(link);
-
-    if(!id){
-        document.getElementById("uyari").textContent = "Geçerli bir YouTube linki yapıştır.";
-        return;
-    }
-
-    document.getElementById("uyari").textContent = "";
-
-    await setDoc(odaRef, {
-        videoId: id
-    }, { merge:true });
-
-    document.getElementById("videoInput").value = "";
-};
-
-const mesajQuery = query(collection(db, "rooms", oda, "messages"), orderBy("tarih"));
-
-onSnapshot(mesajQuery, (snap) => {
-    let html = "";
-    snap.forEach((belge) => {
-        const data = belge.data();
-        const mesajAvatar = data.avatar || "😀";
-        html += `<div class="mesaj"><b>${mesajAvatar} ${data.isim}:</b> ${data.mesaj}</div>`;
-    });
-    document.getElementById("mesajlar").innerHTML = html;
-    const alan = document.getElementById("mesajlar");
-    alan.scrollTop = alan.scrollHeight;
-});
-
-window.mesajGonder = async function(){
-    const input = document.getElementById("mesajInput");
-    const text = input.value.trim();
-
-    if(!text) return;
-
-    await addDoc(collection(db, "rooms", oda, "messages"), {
-        isim: isim,
-        avatar: avatar,
-        mesaj: text,
-        tarih: Date.now()
-    });
-
-    input.value = "";
-};
-
 onSnapshot(collection(db, "rooms", oda, "users"), async () => {
     await pasifleriTemizle();
     const aktifler = await aktifKullanicilariGetir();
@@ -564,8 +612,155 @@ onSnapshot(collection(db, "rooms", oda, "users"), async () => {
     }
 });
 
+/* BASIT WEBRTC SESLI SOHBET */
+let localStream = null;
+let sesBasladi = false;
+let peerConnections = {};
+let remoteAudioEls = {};
+const voiceSignalsRef = collection(db, "rooms", oda, "voiceSignals");
+const rtcConfig = {
+    iceServers: [{ urls: "stun:stun.l.google.com:19302" }]
+};
+
+function sesDurumYaz(metin){
+    document.getElementById("sesDurum").textContent = metin;
+}
+
+async function sinyalGonder(to, data){
+    await addDoc(voiceSignalsRef, {
+        from: kullaniciId,
+        to: to,
+        data: data,
+        zaman: Date.now()
+    });
+}
+
+async function peerOlustur(remoteId, remoteName){
+    if(peerConnections[remoteId]) return peerConnections[remoteId];
+
+    const pc = new RTCPeerConnection(rtcConfig);
+    peerConnections[remoteId] = pc;
+
+    if(localStream){
+        localStream.getTracks().forEach(track => {
+            pc.addTrack(track, localStream);
+        });
+    }
+
+    pc.onicecandidate = async (event) => {
+        if(event.candidate){
+            await sinyalGonder(remoteId, {
+                type: "candidate",
+                candidate: event.candidate
+            });
+        }
+    };
+
+    pc.ontrack = (event) => {
+        if(!remoteAudioEls[remoteId]){
+            const audio = document.createElement("audio");
+            audio.autoplay = true;
+            audio.controls = false;
+            audio.style.display = "none";
+            document.body.appendChild(audio);
+            remoteAudioEls[remoteId] = audio;
+        }
+
+        remoteAudioEls[remoteId].srcObject = event.streams[0];
+    };
+
+    return pc;
+}
+
+window.sesliBaslat = async function(){
+    if(sesBasladi) return;
+
+    try{
+        localStream = await navigator.mediaDevices.getUserMedia({ audio:true, video:false });
+        sesBasladi = true;
+        sesDurumYaz("Sesli sohbet açık. Mikrofon bağlandı.");
+
+        const aktifler = await aktifKullanicilariGetir();
+
+        for(const kisi of aktifler){
+            if(kisi.id === kullaniciId) continue;
+
+            const pc = await peerOlustur(kisi.id, kisi.isim);
+            const offer = await pc.createOffer();
+            await pc.setLocalDescription(offer);
+
+            await sinyalGonder(kisi.id, {
+                type: "offer",
+                sdp: offer
+            });
+        }
+    }catch(e){
+        sesDurumYaz("Mikrofon izni verilmedi veya açılamadı.");
+    }
+};
+
+window.sesliDurdur = function(){
+    if(localStream){
+        localStream.getTracks().forEach(track => track.stop());
+        localStream = null;
+    }
+
+    Object.values(peerConnections).forEach(pc => {
+        try{ pc.close(); }catch(e){}
+    });
+    peerConnections = {};
+
+    Object.values(remoteAudioEls).forEach(el => {
+        try{ el.remove(); }catch(e){}
+    });
+    remoteAudioEls = {};
+
+    sesBasladi = false;
+    sesDurumYaz("Sesli sohbet kapalı.");
+};
+
+onSnapshot(query(voiceSignalsRef, orderBy("zaman")), async (snap) => {
+    for(const belge of snap.docChanges()){
+        if(belge.type !== "added") continue;
+
+        const sinyal = belge.doc.data();
+        if(sinyal.to !== kullaniciId) continue;
+
+        const fromId = sinyal.from;
+        const data = sinyal.data;
+
+        if(!sesBasladi) continue;
+
+        const pc = await peerOlustur(fromId, fromId);
+
+        if(data.type === "offer"){
+            await pc.setRemoteDescription(new RTCSessionDescription(data.sdp));
+            const answer = await pc.createAnswer();
+            await pc.setLocalDescription(answer);
+
+            await sinyalGonder(fromId, {
+                type: "answer",
+                sdp: answer
+            });
+        }
+
+        if(data.type === "answer"){
+            if(!pc.currentRemoteDescription){
+                await pc.setRemoteDescription(new RTCSessionDescription(data.sdp));
+            }
+        }
+
+        if(data.type === "candidate"){
+            try{
+                await pc.addIceCandidate(new RTCIceCandidate(data.candidate));
+            }catch(e){}
+        }
+    }
+});
+
 window.addEventListener("beforeunload", async () => {
     try{
+        window.sesliDurdur();
         clearInterval(heartbeatTimer);
         clearInterval(cleanupTimer);
         await deleteDoc(kullaniciRef);
