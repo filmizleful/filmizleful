@@ -2,173 +2,65 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oda Chat + Video Link</title>
+<title>Filmizleful Oda</title>
 
 <style>
 body{
-    margin:0;
-    font-family:Arial, sans-serif;
     background:#0c0c14;
     color:white;
+    font-family:Arial;
+    text-align:center;
 }
-.ust{
-    background:#111;
-    padding:15px 20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-}
-.ust a{
-    color:white;
-    text-decoration:none;
-    background:#2a2a2a;
-    padding:10px 14px;
-    border-radius:10px;
-}
-.sayfa{
-    max-width:1100px;
-    margin:auto;
-    padding:20px;
-}
-.video-kutu, .chat{
-    background:#151515;
+
+.video{
+    width:90%;
+    max-width:900px;
+    margin:20px auto;
+    aspect-ratio:16/9;
     border-radius:18px;
-    padding:18px;
-    margin-bottom:20px;
+    overflow:hidden;
+    background:#000;
 }
-.video-baslik{
-    font-size:24px;
-    font-weight:bold;
-    margin-bottom:14px;
+
+iframe{
+    width:100%;
+    height:100%;
+    border:0;
 }
-.video-kontrol{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-bottom:14px;
-}
-.video-kontrol input{
-    flex:1;
-    min-width:260px;
-    padding:12px;
-    border:none;
+
+input{
+    padding:10px;
+    width:60%;
     border-radius:10px;
-    background:#222;
-    color:white;
+    border:none;
 }
-.video-kontrol button, .video-link-alani a, .input button{
-    padding:12px 18px;
+
+button{
+    padding:10px 20px;
     border:none;
     border-radius:10px;
     background:#e50914;
     color:white;
     cursor:pointer;
-    font-weight:bold;
-    text-decoration:none;
-    display:inline-block;
-}
-.video-kontrol button:hover, .video-link-alani a:hover, .input button:hover{
-    background:#ff1e2d;
-}
-.video-link-alani{
-    background:#1d1d1d;
-    border-radius:14px;
-    padding:18px;
-    line-height:1.7;
-}
-.video-link-yazi{
-    word-break:break-all;
-    color:#9fdcff;
-    margin-bottom:14px;
-}
-.chat{
-    margin-bottom:0;
-}
-.mesajlar{
-    height:350px;
-    overflow-y:auto;
-    background:#1a1a1a;
-    padding:15px;
-    border-radius:15px;
-}
-.mesaj{
-    margin-bottom:10px;
-    line-height:1.5;
-}
-.input{
-    margin-top:12px;
-    display:flex;
-    gap:10px;
-}
-.input input{
-    flex:1;
-    padding:12px;
-    border-radius:10px;
-    border:none;
-    background:#222;
-    color:white;
-}
-.uyari{
-    margin-top:10px;
-    color:#ff9a9a;
-    font-size:14px;
 }
 </style>
 </head>
+
 <body>
 
-<div class="ust">
-    <div id="odaAdi">Oda</div>
-    <a href="rooms.html">← Geri</a>
+<h1>🎬 Ortak Video</h1>
+
+<input id="link" placeholder="YouTube link yapıştır">
+<button onclick="degistir()">Değiştir</button>
+
+<div class="video">
+<iframe id="oynatici" src="" allowfullscreen></iframe>
 </div>
 
-<div class="sayfa">
-
-    <div class="video-kutu">
-        <div class="video-baslik">📺 Ortak Video Linki</div>
-
-        <div class="video-kontrol">
-            <input id="videoLink" placeholder="YouTube linki yapıştır...">
-            <button onclick="videoAyarla()">Videoyu Değiştir</button>
-        </div>
-
-        <div class="uyari" id="videoUyari"></div>
-
-        <div class="video-link-alani">
-            <div id="videoDurum">Henüz video seçilmedi.</div>
-            <div class="video-link-yazi" id="videoLinkYazi"></div>
-            <a id="youtubeAcBtn" href="#" target="_blank" style="display:none;">▶ YouTube'da Aç</a>
-        </div>
-    </div>
-
-    <div class="chat">
-        <div class="video-baslik">💬 Oda Sohbeti</div>
-
-        <div class="mesajlar" id="mesajlar"></div>
-
-        <div class="input">
-            <input id="mesajInput" placeholder="Mesaj yaz...">
-            <button onclick="gonder()">Gönder</button>
-        </div>
-    </div>
-
-</div>
-
+<!-- FIREBASE -->
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import {
-    getFirestore,
-    collection,
-    addDoc,
-    onSnapshot,
-    query,
-    orderBy,
-    doc,
-    setDoc,
-    getDoc
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBNoenb7tM6mFK8DEruxFtYLo_FwUXY7uc",
@@ -182,97 +74,30 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const params = new URLSearchParams(window.location.search);
-const oda = params.get("oda") || "genel";
-let isim = localStorage.getItem("filmizleful_isim") || "Misafir";
+// oda ismi
+const url = new URL(window.location.href);
+const oda = url.searchParams.get("oda") || "genel";
 
-document.getElementById("odaAdi").textContent = "📺 Oda: " + oda;
+// video değiştir
+window.degistir = async function(){
+    let link = document.getElementById("link").value;
 
-const mesajlarDiv = document.getElementById("mesajlar");
-const videoInput = document.getElementById("videoLink");
-const videoDurum = document.getElementById("videoDurum");
-const videoLinkYazi = document.getElementById("videoLinkYazi");
-const youtubeAcBtn = document.getElementById("youtubeAcBtn");
-const videoUyari = document.getElementById("videoUyari");
+    let id = link.split("v=")[1];
+    if(id.includes("&")) id = id.split("&")[0];
 
-/* CHAT */
-const q = query(collection(db, "rooms", oda, "messages"), orderBy("tarih"));
+    let embed = "https://www.youtube.com/embed/" + id;
 
-onSnapshot(q, (snapshot) => {
-    mesajlarDiv.innerHTML = "";
-    snapshot.forEach(docSnap => {
-        const data = docSnap.data();
-        const div = document.createElement("div");
-        div.className = "mesaj";
-        div.innerHTML = "<b>" + data.isim + ":</b> " + data.mesaj;
-        mesajlarDiv.appendChild(div);
+    await setDoc(doc(db, "odalar", oda), {
+        video: embed
     });
-    mesajlarDiv.scrollTop = mesajlarDiv.scrollHeight;
-});
-
-window.gonder = async function() {
-    const input = document.getElementById("mesajInput");
-    const text = input.value.trim();
-    if (!text) return;
-
-    await addDoc(collection(db, "rooms", oda, "messages"), {
-        isim: isim,
-        mesaj: text,
-        tarih: Date.now()
-    });
-
-    input.value = "";
-};
-
-/* VIDEO */
-const roomDocRef = doc(db, "rooms", oda);
-
-async function odaBelgesiKontrolEt() {
-    const snap = await getDoc(roomDocRef);
-    if (!snap.exists()) {
-        await setDoc(roomDocRef, {
-            videoLink: ""
-        });
-    }
 }
 
-function videoGuncelle(link) {
-    if (link) {
-        videoDurum.textContent = "Bu odada seçili video:";
-        videoLinkYazi.textContent = link;
-        youtubeAcBtn.href = link;
-        youtubeAcBtn.style.display = "inline-block";
-    } else {
-        videoDurum.textContent = "Henüz video seçilmedi.";
-        videoLinkYazi.textContent = "";
-        youtubeAcBtn.style.display = "none";
-    }
-}
-
-await odaBelgesiKontrolEt();
-
-onSnapshot(roomDocRef, (snap) => {
-    const data = snap.data();
-    if (data && typeof data.videoLink !== "undefined") {
-        videoGuncelle(data.videoLink);
-    } else {
-        videoGuncelle("");
+// herkese anlık yansıt
+onSnapshot(doc(db, "odalar", oda), (docSnap) => {
+    if(docSnap.exists()){
+        document.getElementById("oynatici").src = docSnap.data().video;
     }
 });
-
-window.videoAyarla = async function() {
-    const link = videoInput.value.trim();
-
-    if (!link || (!link.includes("youtube.com") && !link.includes("youtu.be"))) {
-        videoUyari.textContent = "Geçerli bir YouTube linki yapıştır.";
-        return;
-    }
-
-    videoUyari.textContent = "";
-
-    await setDoc(roomDocRef, { videoLink: link }, { merge: true });
-    videoInput.value = "";
-};
 </script>
 
 </body>
