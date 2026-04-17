@@ -349,6 +349,13 @@ body{
 </div>
 
 <div class="hero">
+<div style="text-align:center; margin-top:20px; color:#aaa;">
+
+🔥 Şu an <span id="onlineSayi">12</span> kişi online  
+💬 <span id="mesajSayi">128</span> mesaj atıldı  
+🎬 <span id="odaSayi">5</span> aktif oda
+
+</div>
     <h1>Filmizleful</h1>
     <p>Film kategorini seç ve izlemeye başla</p>
 </div>
@@ -474,6 +481,21 @@ let ad = localStorage.getItem("kullanici");
 if(ad){
     document.getElementById("kullaniciYazi").innerText = "👤 " + ad;
 }
+</script>
+<script>
+<script>
+function rastgele(min, max){
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function guncelle(){
+  document.getElementById("onlineSayi").innerText = rastgele(8, 35);
+  document.getElementById("mesajSayi").innerText = rastgele(50, 500);
+  document.getElementById("odaSayi").innerText = rastgele(2, 12);
+}
+
+setInterval(guncelle, 3000);
+guncelle();
 </script>
 </body>
 </html>
