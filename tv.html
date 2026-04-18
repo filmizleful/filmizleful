@@ -3,86 +3,246 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TV - Filmizleful</title>
-
+<title>Televizyon - Filmizleful</title>
 <style>
-body{margin:0;font-family:Arial;background:#0f0f1a;color:white}
-.ust{background:#111;padding:15px;display:flex;justify-content:space-between}
-.logo{color:#e50914;font-size:22px;font-weight:bold}
-.container{display:flex;height:calc(100vh - 60px)}
-.sol{width:300px;background:#161625;padding:10px;overflow:auto}
-.kategori{margin:15px 0 5px;color:#aaa;font-size:13px}
-.kanal{background:#23233a;padding:10px;margin-bottom:8px;border-radius:8px;cursor:pointer}
-.kanal:hover{background:#e50914}
-.sag{flex:1;padding:10px}
-iframe{width:100%;height:70vh;border:none;border-radius:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Arial, sans-serif;
+  background:#0f0f1a;
+  color:white;
+}
+.ust{
+  background:#111;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.logo{
+  color:#e50914;
+  font-size:26px;
+  font-weight:bold;
+}
+.geri{
+  background:#e50914;
+  color:white;
+  text-decoration:none;
+  padding:10px 15px;
+  border-radius:10px;
+  font-weight:bold;
+}
+.container{
+  display:flex;
+  min-height:calc(100vh - 70px);
+}
+.sol{
+  width:320px;
+  background:#161625;
+  padding:15px;
+  overflow-y:auto;
+  border-right:1px solid rgba(255,255,255,0.08);
+}
+.sag{
+  flex:1;
+  padding:20px;
+}
+.arama{
+  width:100%;
+  padding:12px;
+  border:none;
+  outline:none;
+  border-radius:10px;
+  margin-bottom:15px;
+  background:#23233a;
+  color:white;
+}
+.kategori{
+  margin:18px 0 10px;
+  color:#aaa;
+  font-size:13px;
+  font-weight:bold;
+  text-transform:uppercase;
+}
+.kanal{
+  background:#23233a;
+  padding:12px;
+  margin-bottom:10px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:0.2s;
+}
+.kanal:hover{
+  background:#e50914;
+}
+.kart{
+  background:#161625;
+  border-radius:16px;
+  padding:20px;
+  border:1px solid rgba(255,255,255,0.08);
+}
+.baslik{
+  font-size:28px;
+  margin-bottom:10px;
+}
+.alt{
+  color:#b8b8b8;
+  line-height:1.6;
+  margin-bottom:20px;
+}
+.butonlar{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.btn{
+  display:inline-block;
+  text-decoration:none;
+  background:#e50914;
+  color:white;
+  padding:12px 18px;
+  border-radius:10px;
+  font-weight:bold;
+}
+.btn2{
+  display:inline-block;
+  text-decoration:none;
+  background:#23233a;
+  color:white;
+  padding:12px 18px;
+  border-radius:10px;
+  font-weight:bold;
+}
+#durum{
+  margin-top:18px;
+  color:#9f9f9f;
+  font-size:14px;
+}
+@media(max-width:900px){
+  .container{flex-direction:column}
+  .sol{
+    width:100%;
+    border-right:none;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    max-height:320px;
+  }
+}
 </style>
 </head>
-
 <body>
 
 <div class="ust">
-<div class="logo">Filmizleful TV</div>
-<a href="index.html" style="color:white">Ana Sayfa</a>
+  <div class="logo">Filmizleful TV</div>
+  <a href="index.html" class="geri">Ana Sayfa</a>
 </div>
 
 <div class="container">
+  <div class="sol">
+    <input type="text" id="arama" class="arama" placeholder="Kanal ara...">
 
-<div class="sol">
+    <div class="kategori">Türk Kanalları</div>
+    <div id="turkListesi"></div>
 
-<div class="kategori">🇹🇷 TÜRK KANALLAR</div>
+    <div class="kategori">Yabancı Kanallar</div>
+    <div id="yabanciListesi"></div>
+  </div>
 
-<div class="kanal" onclick="ac('TRT Haber','UC7fWeaHhqgM4Ry-RMpM2YYw')">TRT Haber</div>
-<div class="kanal" onclick="ac('A Haber','UC9KQX9mQjFJQzvK4Vn8qApg')">A Haber</div>
-<div class="kanal" onclick="ac('Haber Global','UC0um7d_CK14iGQxP0gGX1NQ')">Haber Global</div>
-<div class="kanal" onclick="ac('NTV','UC5l6g3L8j7A0Y4Shv5R54hQ')">NTV</div>
-<div class="kanal" onclick="ac('TRT Çocuk','UCxWkGJ3b8KfaPwJ8Xj8qTkw')">TRT Çocuk</div>
-<div class="kanal" onclick="ac('TGRT Haber','UCFxHplbcoJK9m70c4Q3o2YQ')">TGRT Haber</div>
-<div class="kanal" onclick="ac('Ülke TV','UCIzXayRP4l9uM6Yq0rH9Q3w')">Ülke TV</div>
-<div class="kanal" onclick="ac('TV100','UC7d0x9jVt3f7c3p7rV9gF6Q')">TV100</div>
-<div class="kanal" onclick="ac('Bloomberg HT','UCy1FXoi5xw3k8z9sX1v4r0Q')">Bloomberg HT</div>
-<div class="kanal" onclick="ac('Kanal 24','UCaM0dP2qM8X0vNq8s2b1lQQ')">Kanal 24</div>
-<div class="kanal" onclick="ac('TRT Spor','UCUZpS3v0hS3n4y5o1xv0kGQ')">TRT Spor</div>
-<div class="kanal" onclick="ac('TRT Belgesel','UCfLMSCq2nXrH1b7hZc9nT4Q')">TRT Belgesel</div>
-<div class="kanal" onclick="ac('TRT Müzik','UCV7K5y5lV5v8yYv0F0X6g7A')">TRT Müzik</div>
-<div class="kanal" onclick="ac('Dream Türk','UC0yK8Y7h8J8X8c0c7X8b9Qw')">Dream Türk</div>
-<div class="kanal" onclick="ac('Power TV','UCv9sVxF8nK1lP4Z4t8b7dQw')">Power TV</div>
+  <div class="sag">
+    <div class="kart">
+      <div class="baslik" id="baslik">TRT Haber</div>
+      <div class="alt" id="aciklama">
+        Kanalı izlemek için aşağıdaki butona bas. Bu sistem YouTube embed hatası vermez; kanalı direkt açar.
+      </div>
 
-<div class="kategori">🌍 YABANCI KANALLAR</div>
+      <div class="butonlar">
+        <a id="izleBtn" class="btn" href="https://www.youtube.com/@trthaber/live" target="_blank">YouTube'da Aç</a>
+        <a id="kanalBtn" class="btn2" href="https://www.youtube.com/@trthaber" target="_blank">Kanal Sayfası</a>
+      </div>
 
-<div class="kanal" onclick="ac('France 24','UCQfwfsi5VrQ8yKZ-UWmAEFg')">France 24</div>
-<div class="kanal" onclick="ac('Al Jazeera','UCNye-wNBqNL5ZzHSJj3l8Bg')">Al Jazeera</div>
-<div class="kanal" onclick="ac('DW News','UCknLrEdhRCp1aegoMqRaCZg')">DW News</div>
-<div class="kanal" onclick="ac('Sky News','UCoMdktPbSTixAyNGwb-UYkQ')">Sky News</div>
-<div class="kanal" onclick="ac('NBC News','UCeY0bbntWzzVIaj2z3QigXg')">NBC News</div>
-<div class="kanal" onclick="ac('ABC News','UCBi2mrWuNuyYy4gbM6fU18Q')">ABC News</div>
-<div class="kanal" onclick="ac('Bloomberg Global','UCIALMKvObZNtJ6AmdCLP7Lg')">Bloomberg</div>
-<div class="kanal" onclick="ac('Reuters','UChqUTb7kYRX8-EiaN3XFrSQ')">Reuters</div>
-<div class="kanal" onclick="ac('Fox 10','UCrhRwvOXN6G2uKn0xgjH6fQ')">Fox 10</div>
-<div class="kanal" onclick="ac('CBS News','UC8p1vwvWtl6T73JiExfWs1g')">CBS News</div>
-<div class="kanal" onclick="ac('Euronews','UCSrZ3UV4jOidv8ppoVuvW9Q')">Euronews</div>
-<div class="kanal" onclick="ac('TRT World','UC7fWeaHhqgM4Ry-RMpM2YYw')">TRT World</div>
-<div class="kanal" onclick="ac('NASA TV','UCLA_DiR1FfKNvjuUpBHmylQ')">NASA TV</div>
-<div class="kanal" onclick="ac('NHK World','UCfhcgoeicjA-D1bQ5G_zc1w')">NHK World</div>
-<div class="kanal" onclick="ac('GB News','UC0vn8ISa4LKMunLbzaXLn4w')">GB News</div>
-
-</div>
-
-<div class="sag">
-<h2 id="baslik">TRT Haber</h2>
-<iframe id="player"
-src="https://www.youtube.com/embed/live_stream?channel=UC7fWeaHhqgM4Ry-RMpM2YYw&autoplay=1"
-allowfullscreen></iframe>
-</div>
-
+      <div id="durum">Seçili kanal: TRT Haber</div>
+    </div>
+  </div>
 </div>
 
 <script>
-function ac(ad, id){
-document.getElementById("baslik").innerText = ad;
-document.getElementById("player").src =
-"https://www.youtube.com/embed/live_stream?channel=" + id + "&autoplay=1";
+const turkKanallar = [
+  { ad: "TRT Haber", live: "https://www.youtube.com/@trthaber/live", kanal: "https://www.youtube.com/@trthaber" },
+  { ad: "A Haber", live: "https://www.youtube.com/@AHaberCanli/live", kanal: "https://www.youtube.com/@AHaberCanli" },
+  { ad: "Haber Global", live: "https://www.youtube.com/@HaberGlobal/live", kanal: "https://www.youtube.com/@HaberGlobal" },
+  { ad: "NTV", live: "https://www.youtube.com/@ntv/live", kanal: "https://www.youtube.com/@ntv" },
+  { ad: "TGRT Haber", live: "https://www.youtube.com/@TGRTHaberTV/live", kanal: "https://www.youtube.com/@TGRTHaberTV" },
+  { ad: "Ülke TV", live: "https://www.youtube.com/@ulketv/live", kanal: "https://www.youtube.com/@ulketv" },
+  { ad: "TV100", live: "https://www.youtube.com/@tv100/live", kanal: "https://www.youtube.com/@tv100" },
+  { ad: "Bloomberg HT", live: "https://www.youtube.com/@BloombergHT/live", kanal: "https://www.youtube.com/@BloombergHT" },
+  { ad: "TRT Çocuk", live: "https://www.youtube.com/@trtcocuk/live", kanal: "https://www.youtube.com/@trtcocuk" },
+  { ad: "TRT Belgesel", live: "https://www.youtube.com/@trtbelgesel/live", kanal: "https://www.youtube.com/@trtbelgesel" },
+  { ad: "TRT Müzik", live: "https://www.youtube.com/@trtmuzik/live", kanal: "https://www.youtube.com/@trtmuzik" },
+  { ad: "TRT Spor", live: "https://www.youtube.com/@trtspor/live", kanal: "https://www.youtube.com/@trtspor" },
+  { ad: "PowerTürk TV", live: "https://www.youtube.com/@powerturktv/live", kanal: "https://www.youtube.com/@powerturktv" },
+  { ad: "Dream Türk", live: "https://www.youtube.com/@DreamTurkTV/live", kanal: "https://www.youtube.com/@DreamTurkTV" },
+  { ad: "Kanal 24", live: "https://www.youtube.com/@kanal24/live", kanal: "https://www.youtube.com/@kanal24" }
+];
+
+const yabanciKanallar = [
+  { ad: "TRT World", live: "https://www.youtube.com/@trtworld/live", kanal: "https://www.youtube.com/@trtworld" },
+  { ad: "France 24 English", live: "https://www.youtube.com/@FRANCE24English/live", kanal: "https://www.youtube.com/@FRANCE24English" },
+  { ad: "Al Jazeera English", live: "https://www.youtube.com/@aljazeeraenglish/live", kanal: "https://www.youtube.com/@aljazeeraenglish" },
+  { ad: "DW News", live: "https://www.youtube.com/@dwnews/live", kanal: "https://www.youtube.com/@dwnews" },
+  { ad: "Sky News", live: "https://www.youtube.com/@SkyNews/live", kanal: "https://www.youtube.com/@SkyNews" },
+  { ad: "ABC News", live: "https://www.youtube.com/@ABCNews/live", kanal: "https://www.youtube.com/@ABCNews" },
+  { ad: "NBC News", live: "https://www.youtube.com/@NBCNews/live", kanal: "https://www.youtube.com/@NBCNews" },
+  { ad: "CBS News", live: "https://www.youtube.com/@CBSNews/live", kanal: "https://www.youtube.com/@CBSNews" },
+  { ad: "Reuters", live: "https://www.youtube.com/@Reuters/live", kanal: "https://www.youtube.com/@Reuters" },
+  { ad: "Bloomberg Television", live: "https://www.youtube.com/@markets/live", kanal: "https://www.youtube.com/@markets" },
+  { ad: "Euronews", live: "https://www.youtube.com/@euronews/live", kanal: "https://www.youtube.com/@euronews" },
+  { ad: "NASA", live: "https://www.youtube.com/@NASA/live", kanal: "https://www.youtube.com/@NASA" },
+  { ad: "NHK World-Japan", live: "https://www.youtube.com/@NHKWORLDJAPAN/live", kanal: "https://www.youtube.com/@NHKWORLDJAPAN" },
+  { ad: "GB News", live: "https://www.youtube.com/@GBNewsOnline/live", kanal: "https://www.youtube.com/@GBNewsOnline" },
+  { ad: "Fox 10 Phoenix", live: "https://www.youtube.com/@FOX10Phoenix/live", kanal: "https://www.youtube.com/@FOX10Phoenix" }
+];
+
+const turkListesi = document.getElementById("turkListesi");
+const yabanciListesi = document.getElementById("yabanciListesi");
+const arama = document.getElementById("arama");
+const baslik = document.getElementById("baslik");
+const aciklama = document.getElementById("aciklama");
+const izleBtn = document.getElementById("izleBtn");
+const kanalBtn = document.getElementById("kanalBtn");
+const durum = document.getElementById("durum");
+
+function sec(ad, live, kanal){
+  baslik.textContent = ad;
+  izleBtn.href = live;
+  kanalBtn.href = kanal;
+  durum.textContent = "Seçili kanal: " + ad;
+  aciklama.textContent = ad + " kanalını izlemek için 'YouTube'da Aç' butonuna bas.";
 }
+
+function kanalElemaniOlustur(item){
+  const div = document.createElement("div");
+  div.className = "kanal";
+  div.textContent = item.ad;
+  div.onclick = () => sec(item.ad, item.live, item.kanal);
+  return div;
+}
+
+function listele(q = ""){
+  turkListesi.innerHTML = "";
+  yabanciListesi.innerHTML = "";
+
+  turkKanallar
+    .filter(x => x.ad.toLowerCase().includes(q.toLowerCase()))
+    .forEach(x => turkListesi.appendChild(kanalElemaniOlustur(x)));
+
+  yabanciKanallar
+    .filter(x => x.ad.toLowerCase().includes(q.toLowerCase()))
+    .forEach(x => yabanciListesi.appendChild(kanalElemaniOlustur(x)));
+}
+
+arama.addEventListener("input", e => listele(e.target.value));
+listele();
 </script>
 
 </body>
