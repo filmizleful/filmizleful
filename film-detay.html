@@ -377,6 +377,67 @@ window.addEventListener("load", function(){
     detayPuanGoster();
 });
 </script>
+<script>
+let xp = Number(localStorage.getItem("xp")) || 0;
+let level = Number(localStorage.getItem("level")) || 1;
 
+// Sayfaya göre süre ayarla
+let sure = 60000; // normal: 60 saniye
+
+if(location.href.includes("film-detay")){
+    sure = 25000; // film izlerken 25 saniye
+}
+
+if(location.href.includes("vip")){
+    sure = 25000; // VIP'de de hızlı
+}
+
+// XP döngüsü
+setInterval(() => {
+    xp += 1;
+
+    let gerekenXP = level * 50;
+
+    if(xp >= gerekenXP){
+        xp = 0;
+        level++;
+        alert("🎉 Level Atladın! Level: " + level);
+    }
+
+    localStorage.setItem("xp", xp);
+    localStorage.setItem("level", level);
+
+    guncelle();
+}, sure);
+
+// Ekrana göster
+function guncelle(){
+    let kutu = document.getElementById("lvlBox");
+
+    if(!kutu){
+        kutu = document.createElement("div");
+        kutu.id = "lvlBox";
+        kutu.style.position = "fixed";
+        kutu.style.bottom = "20px";
+        kutu.style.left = "20px";
+        kutu.style.background = "#111";
+        kutu.style.padding = "10px 15px";
+        kutu.style.borderRadius = "10px";
+        kutu.style.color = "white";
+        kutu.style.fontSize = "14px";
+        kutu.style.zIndex = "9999";
+        document.body.appendChild(kutu);
+    }
+
+    let gerekenXP = level * 50;
+
+    kutu.innerHTML = `
+        ⭐ LVL ${level}<br>
+        XP: ${xp} / ${gerekenXP}
+    `;
+}
+
+guncelle();
+</script>
 </body>
 </html>

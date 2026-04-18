@@ -3,158 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Televizyon - Filmizleful</title>
+<title>TV - Filmizleful</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-
-body{
-  font-family:Arial, sans-serif;
-  background:#0f0f1a;
-  color:white;
-}
-
-.ust{
-  background:#111;
-  padding:15px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.logo{
-  color:#e50914;
-  font-size:26px;
-  font-weight:bold;
-}
-
-.geri{
-  background:#e50914;
-  color:white;
-  text-decoration:none;
-  padding:10px 15px;
-  border-radius:10px;
-  font-weight:bold;
-}
-
-.container{
-  display:flex;
-  height:calc(100vh - 60px);
-}
-
-.sol{
-  width:300px;
-  background:#161625;
-  padding:15px;
-  overflow-y:auto;
-}
-
-.kanal{
-  background:#23233a;
-  padding:12px;
-  margin-bottom:10px;
-  border-radius:10px;
-  cursor:pointer;
-  font-weight:bold;
-  transition:0.2s;
-}
-
-.kanal:hover{
-  background:#e50914;
-}
-
-.sag{
-  flex:1;
-  padding:15px;
-}
-
-.baslik{
-  font-size:22px;
-  margin-bottom:10px;
-}
-
-.video{
-  width:100%;
-  height:70vh;
-  border-radius:12px;
-  overflow:hidden;
-  background:black;
-}
-
-iframe{
-  width:100%;
-  height:100%;
-  border:none;
-}
-
-@media(max-width:800px){
-  .container{flex-direction:column}
-  .sol{width:100%;height:200px}
-}
+body{margin:0;font-family:Arial;background:#0f0f1a;color:white}
+.ust{background:#111;padding:15px;display:flex;justify-content:space-between}
+.logo{color:#e50914;font-size:22px;font-weight:bold}
+.container{display:flex;height:calc(100vh - 60px)}
+.sol{width:300px;background:#161625;padding:10px;overflow:auto}
+.kategori{margin:15px 0 5px;color:#aaa;font-size:13px}
+.kanal{background:#23233a;padding:10px;margin-bottom:8px;border-radius:8px;cursor:pointer}
+.kanal:hover{background:#e50914}
+.sag{flex:1;padding:10px}
+iframe{width:100%;height:70vh;border:none;border-radius:10px}
 </style>
 </head>
 
 <body>
 
 <div class="ust">
-  <div class="logo">Filmizleful TV</div>
-  <a href="index.html" class="geri">Ana Sayfa</a>
+<div class="logo">Filmizleful TV</div>
+<a href="index.html" style="color:white">Ana Sayfa</a>
 </div>
 
 <div class="container">
 
-  <div class="sol">
+<div class="sol">
 
-    <div class="kanal" onclick="ac('TRT Haber','https://www.youtube.com/embed/live_stream?channel=UC7fWeaHhqgM4Ry-RMpM2YYw')">TRT Haber</div>
+<div class="kategori">🇹🇷 TÜRK KANALLAR</div>
 
-    <div class="kanal" onclick="ac('A Haber','https://www.youtube.com/embed/live_stream?channel=UC9KQX9mQjFJQzvK4Vn8qApg')">A Haber</div>
+<div class="kanal" onclick="ac('TRT Haber','UC7fWeaHhqgM4Ry-RMpM2YYw')">TRT Haber</div>
+<div class="kanal" onclick="ac('A Haber','UC9KQX9mQjFJQzvK4Vn8qApg')">A Haber</div>
+<div class="kanal" onclick="ac('Haber Global','UC0um7d_CK14iGQxP0gGX1NQ')">Haber Global</div>
+<div class="kanal" onclick="ac('NTV','UC5l6g3L8j7A0Y4Shv5R54hQ')">NTV</div>
+<div class="kanal" onclick="ac('TRT Çocuk','UCxWkGJ3b8KfaPwJ8Xj8qTkw')">TRT Çocuk</div>
+<div class="kanal" onclick="ac('TGRT Haber','UCFxHplbcoJK9m70c4Q3o2YQ')">TGRT Haber</div>
+<div class="kanal" onclick="ac('Ülke TV','UCIzXayRP4l9uM6Yq0rH9Q3w')">Ülke TV</div>
+<div class="kanal" onclick="ac('TV100','UC7d0x9jVt3f7c3p7rV9gF6Q')">TV100</div>
+<div class="kanal" onclick="ac('Bloomberg HT','UCy1FXoi5xw3k8z9sX1v4r0Q')">Bloomberg HT</div>
+<div class="kanal" onclick="ac('Kanal 24','UCaM0dP2qM8X0vNq8s2b1lQQ')">Kanal 24</div>
+<div class="kanal" onclick="ac('TRT Spor','UCUZpS3v0hS3n4y5o1xv0kGQ')">TRT Spor</div>
+<div class="kanal" onclick="ac('TRT Belgesel','UCfLMSCq2nXrH1b7hZc9nT4Q')">TRT Belgesel</div>
+<div class="kanal" onclick="ac('TRT Müzik','UCV7K5y5lV5v8yYv0F0X6g7A')">TRT Müzik</div>
+<div class="kanal" onclick="ac('Dream Türk','UC0yK8Y7h8J8X8c0c7X8b9Qw')">Dream Türk</div>
+<div class="kanal" onclick="ac('Power TV','UCv9sVxF8nK1lP4Z4t8b7dQw')">Power TV</div>
 
-    <div class="kanal" onclick="ac('Haber Global','https://www.youtube.com/embed/live_stream?channel=UC0um7d_CK14iGQxP0gGX1NQ')">Haber Global</div>
+<div class="kategori">🌍 YABANCI KANALLAR</div>
 
-    <div class="kanal" onclick="ac('NTV','https://www.youtube.com/embed/live_stream?channel=UC5l6g3L8j7A0Y4Shv5R54hQ')">NTV</div>
+<div class="kanal" onclick="ac('France 24','UCQfwfsi5VrQ8yKZ-UWmAEFg')">France 24</div>
+<div class="kanal" onclick="ac('Al Jazeera','UCNye-wNBqNL5ZzHSJj3l8Bg')">Al Jazeera</div>
+<div class="kanal" onclick="ac('DW News','UCknLrEdhRCp1aegoMqRaCZg')">DW News</div>
+<div class="kanal" onclick="ac('Sky News','UCoMdktPbSTixAyNGwb-UYkQ')">Sky News</div>
+<div class="kanal" onclick="ac('NBC News','UCeY0bbntWzzVIaj2z3QigXg')">NBC News</div>
+<div class="kanal" onclick="ac('ABC News','UCBi2mrWuNuyYy4gbM6fU18Q')">ABC News</div>
+<div class="kanal" onclick="ac('Bloomberg Global','UCIALMKvObZNtJ6AmdCLP7Lg')">Bloomberg</div>
+<div class="kanal" onclick="ac('Reuters','UChqUTb7kYRX8-EiaN3XFrSQ')">Reuters</div>
+<div class="kanal" onclick="ac('Fox 10','UCrhRwvOXN6G2uKn0xgjH6fQ')">Fox 10</div>
+<div class="kanal" onclick="ac('CBS News','UC8p1vwvWtl6T73JiExfWs1g')">CBS News</div>
+<div class="kanal" onclick="ac('Euronews','UCSrZ3UV4jOidv8ppoVuvW9Q')">Euronews</div>
+<div class="kanal" onclick="ac('TRT World','UC7fWeaHhqgM4Ry-RMpM2YYw')">TRT World</div>
+<div class="kanal" onclick="ac('NASA TV','UCLA_DiR1FfKNvjuUpBHmylQ')">NASA TV</div>
+<div class="kanal" onclick="ac('NHK World','UCfhcgoeicjA-D1bQ5G_zc1w')">NHK World</div>
+<div class="kanal" onclick="ac('GB News','UC0vn8ISa4LKMunLbzaXLn4w')">GB News</div>
 
-    <div class="kanal" onclick="ac('TRT Çocuk','https://www.youtube.com/embed/live_stream?channel=UCxWkGJ3b8KfaPwJ8Xj8qTkw')">TRT Çocuk</div>
+</div>
 
-    <div class="kanal" onclick="ac('Kanal 24','https://www.youtube.com/embed/live_stream?channel=UCaM0dP2qM8X0vNq8s2b1lQQ')">Kanal 24</div>
-
-    <div class="kanal" onclick="ac('TGRT Haber','https://www.youtube.com/embed/live_stream?channel=UCFxHplbcoJK9m70c4Q3o2YQ')">TGRT Haber</div>
-
-    <div class="kanal" onclick="ac('Ülke TV','https://www.youtube.com/embed/live_stream?channel=UCIzXayRP4l9uM6Yq0rH9Q3w')">Ülke TV</div>
-
-    <div class="kanal" onclick="ac('TV100','https://www.youtube.com/embed/live_stream?channel=UC7d0x9jVt3f7c3p7rV9gF6Q')">TV100</div>
-
-    <div class="kanal" onclick="ac('Bloomberg HT','https://www.youtube.com/embed/live_stream?channel=UCy1FXoi5xw3k8z9sX1v4r0Q')">Bloomberg HT</div>
-
-    <div class="kanal" onclick="ac('TRT World','https://www.youtube.com/embed/live_stream?channel=UC7fWeaHhqgM4Ry-RMpM2YYw')">TRT World</div>
-
-    <div class="kanal" onclick="ac('France 24','https://www.youtube.com/embed/live_stream?channel=UCQfwfsi5VrQ8yKZ-UWmAEFg')">France 24</div>
-
-    <div class="kanal" onclick="ac('Al Jazeera','https://www.youtube.com/embed/live_stream?channel=UCNye-wNBqNL5ZzHSJj3l8Bg')">Al Jazeera</div>
-
-    <div class="kanal" onclick="ac('DW News','https://www.youtube.com/embed/live_stream?channel=UCknLrEdhRCp1aegoMqRaCZg')">DW News</div>
-
-    <div class="kanal" onclick="ac('Sky News','https://www.youtube.com/embed/live_stream?channel=UCoMdktPbSTixAyNGwb-UYkQ')">Sky News</div>
-
-    <div class="kanal" onclick="ac('NASA TV','https://www.youtube.com/embed/live_stream?channel=UCLA_DiR1FfKNvjuUpBHmylQ')">NASA TV</div>
-
-  </div>
-
-  <div class="sag">
-    <div class="baslik" id="baslik">TRT Haber</div>
-
-    <div class="video">
-      <iframe id="player"
-      src="https://www.youtube.com/embed/live_stream?channel=UC7fWeaHhqgM4Ry-RMpM2YYw&autoplay=1"
-      allowfullscreen></iframe>
-    </div>
-  </div>
+<div class="sag">
+<h2 id="baslik">TRT Haber</h2>
+<iframe id="player"
+src="https://www.youtube.com/embed/live_stream?channel=UC7fWeaHhqgM4Ry-RMpM2YYw&autoplay=1"
+allowfullscreen></iframe>
+</div>
 
 </div>
 
 <script>
-function ac(ad, link){
-  document.getElementById("baslik").innerText = ad;
-  document.getElementById("player").src = link + "&autoplay=1";
+function ac(ad, id){
+document.getElementById("baslik").innerText = ad;
+document.getElementById("player").src =
+"https://www.youtube.com/embed/live_stream?channel=" + id + "&autoplay=1";
 }
 </script>
 
