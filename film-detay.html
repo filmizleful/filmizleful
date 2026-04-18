@@ -3,245 +3,379 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Film Detayı</title>
+<title>Film Detayı - Filmizleful</title>
 
 <style>
-*{box-sizing:border-box;}
+*{
+    box-sizing:border-box;
+}
 
 body{
     margin:0;
     font-family:Arial, sans-serif;
-    background:radial-gradient(circle at top, #202033, #0c0c14 70%);
+    background:radial-gradient(circle at top, #1d1a33 0%, #0b0b14 55%, #000 100%);
     color:white;
-    min-height:100vh;
 }
 
-.sayfa{
-    max-width:1400px;
-    margin:0 auto;
-    padding:70px 70px 60px;
-}
-
-.ust{
+.ustbar{
+    background:rgba(10,10,16,0.95);
+    padding:18px 28px;
     display:flex;
-    align-items:flex-start;
-    gap:55px;
-    margin-bottom:70px;
-    flex-wrap:wrap;
-}
-
-.poster{
-    width:230px;
-    height:300px;
-    border-radius:22px;
-    overflow:hidden;
-    background:rgba(255,255,255,0.03);
-    box-shadow:0 10px 30px rgba(0,0,0,0.35);
-    flex-shrink:0;
-}
-
-.poster img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-}
-
-.bilgi{
-    max-width:820px;
-    padding-top:8px;
-}
-
-.bilgi h1{
-    margin:0 0 22px 0;
-    font-size:64px;
-    line-height:1;
-    font-weight:800;
-}
-
-.meta{
-    font-size:20px;
-    color:#f2f2f2;
-    margin-bottom:22px;
-    font-weight:600;
-}
-
-.ozet{
-    font-size:19px;
-    line-height:1.7;
-    color:#f4f4f4;
-    margin-bottom:28px;
-    max-width:760px;
-}
-
-.butonlar{
-    display:flex;
-    gap:16px;
-    flex-wrap:wrap;
-}
-
-.butonlar a{
-    text-decoration:none;
-    color:white;
-    font-size:18px;
-    font-weight:700;
-    padding:14px 24px;
-    border-radius:14px;
-    display:inline-flex;
+    justify-content:space-between;
     align-items:center;
-    justify-content:center;
-    min-width:170px;
-    transition:0.25s;
+    flex-wrap:wrap;
+    gap:12px;
+    border-bottom:1px solid rgba(255,255,255,0.06);
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
-.fragman{
-    background:linear-gradient(90deg,#ff9c52,#ff6d3a);
+.logo{
+    font-size:28px;
+    color:#ff6d7a;
+    font-weight:bold;
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
-.izle{
-    background:linear-gradient(90deg,#55f3ff,#2ed8d8);
+.menu{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    align-items:center;
 }
 
-.geri{
-    background:#41445a;
+.menu a{
+    color:white;
+    text-decoration:none;
+    padding:8px 14px;
+    border-radius:10px;
+    transition:0.3s;
+    font-weight:bold;
 }
 
-.butonlar a:hover{
-    transform:translateY(-2px) scale(1.02);
+.menu a:hover{
+    background:#1f1f2d;
 }
 
-.alt{
-    max-width:980px;
-    margin:0 auto;
+.avatar-ust{
+    background:#ff6b81;
+    padding:8px 14px;
+    border-radius:20px;
+    font-size:14px;
+    color:white;
+    font-weight:bold;
+    display:inline-block;
+    white-space:nowrap;
 }
 
-.hakkinda{
-    background:rgba(255,255,255,0.03);
-    border:1px solid rgba(255,255,255,0.08);
-    border-radius:22px;
-    padding:28px 30px;
+.detay-alan{
+    max-width:1200px;
+    margin:30px auto;
+    padding:0 20px;
+}
+
+.detay-kutu{
+    display:flex;
+    gap:30px;
+    flex-wrap:wrap;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:28px;
+    padding:24px;
     box-shadow:0 10px 30px rgba(0,0,0,0.25);
 }
 
-.hakkinda h2{
-    margin:0 0 18px 0;
-    font-size:34px;
-    color:#ffe08a;
-    font-weight:800;
+.detay-sol{
+    flex:1;
+    min-width:280px;
+    max-width:360px;
 }
 
-.hakkinda p{
-    margin:0 0 16px 0;
+.detay-sol img{
+    width:100%;
+    border-radius:20px;
+    display:block;
+    object-fit:cover;
+}
+
+.detay-sag{
+    flex:2;
+    min-width:280px;
+}
+
+.detay-baslik{
+    font-size:42px;
+    margin:0 0 10px;
+}
+
+.detay-bilgi{
     font-size:18px;
-    line-height:1.8;
-    color:#f2f2f2;
+    color:#d8d8e8;
+    margin-bottom:12px;
 }
 
-.hata{
+.detay-puan{
+    font-size:18px;
+    color:#ffe3a8;
+    font-weight:bold;
+    margin-bottom:18px;
+}
+
+.detay-aciklama{
+    color:#f1f1f7;
+    line-height:1.7;
+    font-size:17px;
+    margin-bottom:24px;
+}
+
+.detay-butonlar{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-bottom:24px;
+}
+
+.detay-buton{
+    display:inline-block;
+    text-decoration:none;
+    background:linear-gradient(90deg,#ffb58b,#ff7588);
+    color:white;
+    padding:14px 24px;
+    border-radius:14px;
+    font-weight:bold;
+    transition:0.3s;
+    border:none;
+    cursor:pointer;
+}
+
+.detay-buton:hover{
+    transform:scale(1.04);
+}
+
+.detay-buton.geri{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.08);
+}
+
+.detay-puan-alani{
+    margin-top:8px;
+    background:rgba(255,255,255,0.04);
+    padding:16px;
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,0.05);
+    max-width:360px;
+}
+
+.puan-baslik{
+    font-size:18px;
+    margin-bottom:10px;
+    font-weight:bold;
+}
+
+.puan-yildiz{
+    font-size:28px;
+    cursor:pointer;
+    margin-right:4px;
+    transition:0.2s;
+}
+
+.puan-yildiz:hover{
+    transform:scale(1.12);
+}
+
+#detayPuanYazi{
+    margin-top:10px;
+    color:#ffdca8;
+    font-size:15px;
+}
+
+.alt{
     text-align:center;
-    padding:100px 20px;
-    font-size:24px;
+    color:#9ea0b8;
+    padding:24px;
+    border-top:1px solid rgba(255,255,255,0.06);
+    margin-top:30px;
 }
 
-@media (max-width:900px){
-    .sayfa{
-        padding:35px 20px 40px;
+@media(max-width:800px){
+    .detay-baslik{
+        font-size:32px;
     }
 
-    .ust{
-        flex-direction:column;
-        gap:28px;
-        margin-bottom:40px;
-    }
-
-    .poster{
-        width:200px;
-        height:260px;
-    }
-
-    .bilgi h1{
-        font-size:44px;
-    }
-
-    .meta{
-        font-size:17px;
-    }
-
-    .ozet{
-        font-size:17px;
-    }
-
-    .butonlar a{
-        width:100%;
-        min-width:0;
-    }
-
-    .hakkinda h2{
-        font-size:28px;
-    }
-
-    .hakkinda p{
-        font-size:16px;
+    .detay-kutu{
+        padding:18px;
     }
 }
 </style>
 </head>
 <body>
 
-<div class="sayfa" id="detayAlani"></div>
+<div class="ustbar">
+    <div class="logo">🎬 Filmizleful</div>
 
-<script src="filmler.js"></script>
-<script>
-const params = new URLSearchParams(window.location.search);
-const filmId = params.get("id");
-const film = filmBul(filmId);
-const detayAlani = document.getElementById("detayAlani");
+    <div class="menu">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="korku.html">Korku</a>
+        <a href="aksiyon.html">Aksiyon</a>
+        <a href="bilimkurgu.html">Bilim Kurgu</a>
+        <a href="macera.html">Macera</a>
+        <a href="vip.html">👑 VIP</a>
+        <a href="giris.html">👤 Giriş</a>
+        <div class="avatar-ust" id="kullaniciYazi">😎 Misafir</div>
+    </div>
+</div>
 
-if(!film){
-    detayAlani.innerHTML = `
-        <div class="hata">
-            Film bulunamadı.<br><br>
-            <a href="index.html" style="color:#fff; text-decoration:none; background:#444; padding:12px 20px; border-radius:12px;">Ana Sayfaya Dön</a>
+<div class="detay-alan">
+    <div class="detay-kutu">
+        <div class="detay-sol">
+            <img id="filmResim" src="" alt="Film Afişi">
         </div>
-    `;
-}else{
-    document.title = film.isim;
 
-    let geriSayfasi = "index.html";
-
-    if(film.tur === "aksiyon") geriSayfasi = "aksiyon.html";
-    if(film.tur === "korku") geriSayfasi = "korku.html";
-    if(film.tur === "bilimkurgu") geriSayfasi = "bilimkurgu.html";
-    if(film.tur === "macera") geriSayfasi = "macera.html";
-
-    detayAlani.innerHTML = `
-        <div class="ust">
-            <div class="poster">
-                <img src="${film.afis}" alt="${film.isim} afiş">
+        <div class="detay-sag">
+            <h1 class="detay-baslik" id="filmAd">Film Yükleniyor...</h1>
+            <div class="detay-bilgi" id="filmBilgi">Kategori • Yıl</div>
+            <div class="detay-puan" id="filmImdb">⭐ IMDb</div>
+            <div class="detay-aciklama" id="filmAciklama">
+                Film açıklaması yükleniyor...
             </div>
 
-            <div class="bilgi">
-                <h1>${film.isim}</h1>
-                <div class="meta">${film.meta}</div>
-                <div class="ozet">${film.ozet}</div>
+            <div class="detay-butonlar">
+                <button class="detay-buton" onclick="izleMesaj()">▶ İzle</button>
+                <a href="index.html" class="detay-buton geri">← Ana Sayfaya Dön</a>
+            </div>
 
-                <div class="butonlar">
-                    <a href="${film.fragman}" target="_blank" class="fragman">▶ Fragman izle</a>
-                    <a href="${film.izle}" target="_blank" class="izle">📺 Nerede izlenir</a>
-                    <a href="${geriSayfasi}" class="geri">← Geri dön</a>
+            <div class="detay-puan-alani">
+                <div class="puan-baslik">Sen de puan ver</div>
+                <div>
+                    <span class="puan-yildiz" onclick="detayPuanVer(1)">⭐</span>
+                    <span class="puan-yildiz" onclick="detayPuanVer(2)">⭐</span>
+                    <span class="puan-yildiz" onclick="detayPuanVer(3)">⭐</span>
+                    <span class="puan-yildiz" onclick="detayPuanVer(4)">⭐</span>
+                    <span class="puan-yildiz" onclick="detayPuanVer(5)">⭐</span>
                 </div>
+                <div id="detayPuanYazi">Senin puanın: Yok</div>
             </div>
         </div>
+    </div>
+</div>
 
-        <div class="alt">
-            <div class="hakkinda">
-                <h2>🎬 Film Hakkında</h2>
-                <p>${film.hakkinda1}</p>
-                <p>${film.hakkinda2}</p>
-            </div>
-        </div>
-    `;
+<div class="alt">
+    © 2026 Filmizleful
+</div>
+
+<script>
+const filmler = {
+    "john-wick": {
+        ad: "John Wick",
+        kategori: "Aksiyon",
+        yil: "2014",
+        imdb: "7.4",
+        resim: "https://image.tmdb.org/t/p/w500/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg",
+        aciklama: "Eski bir tetikçi olan John Wick, sakin hayatına geri dönmeye çalışırken beklenmedik bir saldırıyla yeniden karanlık dünyanın içine çekilir. Tempolu sahneleri ve stil sahibi aksiyonu ile öne çıkar."
+    },
+    "batman": {
+        ad: "Batman",
+        kategori: "Aksiyon",
+        yil: "2022",
+        imdb: "7.8",
+        resim: "https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg",
+        aciklama: "Gotham şehri yeni bir tehdit altındayken Batman karanlık bir bilmece zincirini çözmeye çalışır. Suç, gizem ve aksiyonu bir araya getiren güçlü bir yapım."
+    },
+    "mad-max": {
+        ad: "Mad Max",
+        kategori: "Aksiyon",
+        yil: "2015",
+        imdb: "8.1",
+        resim: "https://image.tmdb.org/t/p/w500/8tZYtuWezp8JbcsvHYO0O46tFbo.jpg",
+        aciklama: "Çölün ortasında hayatta kalma mücadelesi veren karakterler, nefes kesen kovalamacalar ve sert bir dünyanın içinde özgürlük için savaşır."
+    },
+    "interstellar": {
+        ad: "Interstellar",
+        kategori: "Bilim Kurgu",
+        yil: "2014",
+        imdb: "8.7",
+        resim: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
+        aciklama: "İnsanlığın geleceği tehlikedeyken bir grup astronot, yeni yaşanabilir dünyalar bulmak için uzayın derinliklerine doğru büyük bir yolculuğa çıkar."
+    },
+    "the-conjuring": {
+        ad: "The Conjuring",
+        kategori: "Korku",
+        yil: "2013",
+        imdb: "7.5",
+        resim: "https://image.tmdb.org/t/p/w500/wVYREutTvI2tmxr6ujrHT704wGF.jpg",
+        aciklama: "Doğaüstü olaylarla baş etmeye çalışan bir aile, ünlü paranormal araştırmacılardan yardım ister. Gerilimli atmosferiyle dikkat çeken korku filmi."
+    },
+    "avatar": {
+        ad: "Avatar",
+        kategori: "Macera",
+        yil: "2009",
+        imdb: "7.9",
+        resim: "https://image.tmdb.org/t/p/w500/kyeqWdyUXW608qlYkRqosgbbJyK.jpg",
+        aciklama: "Pandora gezegeninde geçen bu büyük macera, görsel dünyası ve etkileyici atmosferiyle izleyiciyi farklı bir evrene taşır."
+    }
+};
+
+function aktifFilmIdAl(){
+    const params = new URLSearchParams(window.location.search);
+    return params.get("id") || "john-wick";
 }
+
+function filmiYukle(){
+    const filmId = aktifFilmIdAl();
+    const film = filmler[filmId];
+
+    if(!film){
+        document.getElementById("filmAd").innerText = "Film bulunamadı";
+        document.getElementById("filmBilgi").innerText = "";
+        document.getElementById("filmImdb").innerText = "";
+        document.getElementById("filmAciklama").innerText = "Bu film için detay bulunamadı.";
+        document.getElementById("filmResim").src = "";
+        return;
+    }
+
+    document.title = film.ad + " - Filmizleful";
+    document.getElementById("filmAd").innerText = film.ad;
+    document.getElementById("filmBilgi").innerText = film.kategori + " • " + film.yil;
+    document.getElementById("filmImdb").innerText = "⭐ IMDb " + film.imdb;
+    document.getElementById("filmAciklama").innerText = film.aciklama;
+    document.getElementById("filmResim").src = film.resim;
+    document.getElementById("filmResim").alt = film.ad + " Afişi";
+}
+
+function detayPuanVer(puan){
+    const filmId = aktifFilmIdAl();
+    localStorage.setItem("puan_" + filmId, puan);
+    detayPuanGoster();
+}
+
+function detayPuanGoster(){
+    const filmId = aktifFilmIdAl();
+    const puan = localStorage.getItem("puan_" + filmId);
+    const alan = document.getElementById("detayPuanYazi");
+
+    if(puan){
+        alan.innerText = "Senin puanın: " + puan + "/5";
+    }else{
+        alan.innerText = "Senin puanın: Yok";
+    }
+}
+
+function izleMesaj(){
+    alert("Şimdilik izleme butonu hazır. Sonra buraya film linki veya oynatıcı ekleyebiliriz.");
+}
+
+let ad = localStorage.getItem("kullanici");
+if(ad){
+    document.getElementById("kullaniciYazi").innerText = "👤 " + ad;
+}
+
+window.addEventListener("load", function(){
+    filmiYukle();
+    detayPuanGoster();
+});
 </script>
 
 </body>

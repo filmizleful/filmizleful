@@ -351,7 +351,7 @@ body{
     color:#ffe3a8;
     font-size:15px;
     font-weight:bold;
-    margin-bottom:16px;
+    margin-bottom:14px;
 }
 
 .film a{
@@ -367,6 +367,24 @@ body{
 
 .film a:hover{
     background:#ff6589;
+}
+
+.favori-buton{
+    display:block;
+    width:100%;
+    margin-top:12px;
+    border:none;
+    border-radius:12px;
+    padding:11px 12px;
+    background:rgba(255,255,255,0.08);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.favori-buton:hover{
+    background:#ff6b81;
 }
 
 .sonuc-yok{
@@ -441,6 +459,7 @@ body{
         <a href="aksiyon.html">Aksiyon</a>
         <a href="bilimkurgu.html">Bilim Kurgu</a>
         <a href="macera.html">Macera</a>
+        <a href="favoriler.html">❤️ Favoriler</a>
         <a href="vip.html">👑 VIP</a>
         <a href="giris.html">👤 Giriş</a>
         <div class="avatar-ust" id="kullaniciYazi">😎 Misafir</div>
@@ -532,6 +551,7 @@ body{
         <div class="film-bilgi">Aksiyon • 2014</div>
         <div class="film-puan">⭐ IMDb 7.4</div>
         <a href="film-detay.html?id=john-wick">İzle</a>
+        <button class="favori-buton" onclick="favoriEkle('john-wick','John Wick','Aksiyon • 2014','https://image.tmdb.org/t/p/w500/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg')">❤️ Favoriye Ekle</button>
     </div>
 
     <div class="film arama-ogesi" data-ara="batman aksiyon 2022 robert pattinson">
@@ -540,6 +560,7 @@ body{
         <div class="film-bilgi">Aksiyon • 2022</div>
         <div class="film-puan">⭐ IMDb 7.8</div>
         <a href="film-detay.html?id=batman">İzle</a>
+        <button class="favori-buton" onclick="favoriEkle('batman','Batman','Aksiyon • 2022','https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg')">❤️ Favoriye Ekle</button>
     </div>
 
     <div class="film arama-ogesi" data-ara="mad max fury road aksiyon 2015">
@@ -548,6 +569,7 @@ body{
         <div class="film-bilgi">Aksiyon • 2015</div>
         <div class="film-puan">⭐ IMDb 8.1</div>
         <a href="film-detay.html?id=mad-max">İzle</a>
+        <button class="favori-buton" onclick="favoriEkle('mad-max','Mad Max','Aksiyon • 2015','https://image.tmdb.org/t/p/w500/8tZYtuWezp8JbcsvHYO0O46tFbo.jpg')">❤️ Favoriye Ekle</button>
     </div>
 
     <div class="film arama-ogesi" data-ara="interstellar bilim kurgu 2014 uzay nolan">
@@ -556,6 +578,7 @@ body{
         <div class="film-bilgi">Bilim Kurgu • 2014</div>
         <div class="film-puan">⭐ IMDb 8.7</div>
         <a href="film-detay.html?id=interstellar">İzle</a>
+        <button class="favori-buton" onclick="favoriEkle('interstellar','Interstellar','Bilim Kurgu • 2014','https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg')">❤️ Favoriye Ekle</button>
     </div>
 
     <div class="film arama-ogesi" data-ara="the conjuring korku 2013 gerilim">
@@ -564,6 +587,7 @@ body{
         <div class="film-bilgi">Korku • 2013</div>
         <div class="film-puan">⭐ IMDb 7.5</div>
         <a href="film-detay.html?id=the-conjuring">İzle</a>
+        <button class="favori-buton" onclick="favoriEkle('the-conjuring','The Conjuring','Korku • 2013','https://image.tmdb.org/t/p/w500/wVYREutTvI2tmxr6ujrHT704wGF.jpg')">❤️ Favoriye Ekle</button>
     </div>
 
     <div class="film arama-ogesi" data-ara="avatar macera bilim kurgu 2009">
@@ -572,6 +596,7 @@ body{
         <div class="film-bilgi">Macera • 2009</div>
         <div class="film-puan">⭐ IMDb 7.9</div>
         <a href="film-detay.html?id=avatar">İzle</a>
+        <button class="favori-buton" onclick="favoriEkle('avatar','Avatar','Macera • 2009','https://image.tmdb.org/t/p/w500/kyeqWdyUXW608qlYkRqosgbbJyK.jpg')">❤️ Favoriye Ekle</button>
     </div>
 </div>
 
@@ -623,53 +648,29 @@ function guncelle(){
 setInterval(guncelle, 3000);
 guncelle();
 </script>
-<div style="max-width:700px;margin:40px auto;padding:20px;background:#111;border-radius:15px;">
-    <h2>💬 Ziyaretçi Yorumları</h2>
-
-    <input id="yorumIsim" placeholder="Adın" style="width:100%;padding:10px;margin:5px 0;border-radius:10px;border:none;">
-    
-    <textarea id="yorumMetin" placeholder="Yorum yaz..." style="width:100%;padding:10px;margin:5px 0;border-radius:10px;border:none;"></textarea>
-    
-    <button onclick="yorumEkle()" style="padding:10px 20px;border:none;border-radius:10px;background:#ff6d7a;color:white;">Gönder</button>
-
-    <div id="yorumlar" style="margin-top:20px;"></div>
-</div>
 
 <script>
-function yorumEkle(){
-    let isim = document.getElementById("yorumIsim").value;
-    let metin = document.getElementById("yorumMetin").value;
+function favoriEkle(id, ad, bilgi, resim){
+    let favoriler = JSON.parse(localStorage.getItem("favoriler")) || [];
 
-    if(isim=="" || metin==""){
-        alert("Boş bırakma");
+    let varMi = favoriler.find(film => film.id === id);
+
+    if(varMi){
+        alert("Bu film zaten favorilerde.");
         return;
     }
 
-    let yorumlar = JSON.parse(localStorage.getItem("yorumlar") || "[]");
-
-    yorumlar.push({isim, metin});
-
-    localStorage.setItem("yorumlar", JSON.stringify(yorumlar));
-
-    goster();
-}
-
-function goster(){
-    let yorumlar = JSON.parse(localStorage.getItem("yorumlar") || "[]");
-
-    let alan = document.getElementById("yorumlar");
-    alan.innerHTML="";
-
-    yorumlar.reverse().forEach(y=>{
-        alan.innerHTML += `
-        <div style="background:#222;padding:10px;margin:10px 0;border-radius:10px;">
-            <b>${y.isim}</b><br>
-            ${y.metin}
-        </div>`;
+    favoriler.push({
+        id:id,
+        ad:ad,
+        bilgi:bilgi,
+        resim:resim
     });
-}
 
-goster();
+    localStorage.setItem("favoriler", JSON.stringify(favoriler));
+    alert(ad + " favorilere eklendi.");
+}
 </script>
+
 </body>
 </html>

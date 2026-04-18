@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Televizyon - Filmizleful</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:Arial, sans-serif;
+  background:#0f0f1a;
+  color:white;
+}
+
+.ust{
+  background:#111;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  color:#e50914;
+  font-size:26px;
+  font-weight:bold;
+}
+
+.geri{
+  background:#e50914;
+  color:white;
+  text-decoration:none;
+  padding:10px 15px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.container{
+  display:flex;
+  height:calc(100vh - 60px);
+}
+
+.sol{
+  width:300px;
+  background:#161625;
+  padding:15px;
+  overflow-y:auto;
+}
+
+.kanal{
+  background:#23233a;
+  padding:12px;
+  margin-bottom:10px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:0.2s;
+}
+
+.kanal:hover{
+  background:#e50914;
+}
+
+.sag{
+  flex:1;
+  padding:15px;
+}
+
+.baslik{
+  font-size:22px;
+  margin-bottom:10px;
+}
+
+.video{
+  width:100%;
+  height:70vh;
+  border-radius:12px;
+  overflow:hidden;
+  background:black;
+}
+
+iframe{
+  width:100%;
+  height:100%;
+  border:none;
+}
+
+@media(max-width:800px){
+  .container{flex-direction:column}
+  .sol{width:100%;height:200px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="ust">
+  <div class="logo">Filmizleful TV</div>
+  <a href="index.html" class="geri">Ana Sayfa</a>
+</div>
+
+<div class="container">
+
+  <div class="sol">
+
+    <div class="kanal" onclick="ac('TRT Haber','https://www.youtube.com/embed/live_stream?channel=UC7fWeaHhqgM4Ry-RMpM2YYw')">TRT Haber</div>
+
+    <div class="kanal" onclick="ac('A Haber','https://www.youtube.com/embed/live_stream?channel=UC9KQX9mQjFJQzvK4Vn8qApg')">A Haber</div>
+
+    <div class="kanal" onclick="ac('Haber Global','https://www.youtube.com/embed/live_stream?channel=UC0um7d_CK14iGQxP0gGX1NQ')">Haber Global</div>
+
+    <div class="kanal" onclick="ac('NTV','https://www.youtube.com/embed/live_stream?channel=UC5l6g3L8j7A0Y4Shv5R54hQ')">NTV</div>
+
+    <div class="kanal" onclick="ac('TRT Çocuk','https://www.youtube.com/embed/live_stream?channel=UCxWkGJ3b8KfaPwJ8Xj8qTkw')">TRT Çocuk</div>
+
+    <div class="kanal" onclick="ac('Kanal 24','https://www.youtube.com/embed/live_stream?channel=UCaM0dP2qM8X0vNq8s2b1lQQ')">Kanal 24</div>
+
+    <div class="kanal" onclick="ac('TGRT Haber','https://www.youtube.com/embed/live_stream?channel=UCFxHplbcoJK9m70c4Q3o2YQ')">TGRT Haber</div>
+
+    <div class="kanal" onclick="ac('Ülke TV','https://www.youtube.com/embed/live_stream?channel=UCIzXayRP4l9uM6Yq0rH9Q3w')">Ülke TV</div>
+
+    <div class="kanal" onclick="ac('TV100','https://www.youtube.com/embed/live_stream?channel=UC7d0x9jVt3f7c3p7rV9gF6Q')">TV100</div>
+
+    <div class="kanal" onclick="ac('Bloomberg HT','https://www.youtube.com/embed/live_stream?channel=UCy1FXoi5xw3k8z9sX1v4r0Q')">Bloomberg HT</div>
+
+    <div class="kanal" onclick="ac('TRT World','https://www.youtube.com/embed/live_stream?channel=UC7fWeaHhqgM4Ry-RMpM2YYw')">TRT World</div>
+
+    <div class="kanal" onclick="ac('France 24','https://www.youtube.com/embed/live_stream?channel=UCQfwfsi5VrQ8yKZ-UWmAEFg')">France 24</div>
+
+    <div class="kanal" onclick="ac('Al Jazeera','https://www.youtube.com/embed/live_stream?channel=UCNye-wNBqNL5ZzHSJj3l8Bg')">Al Jazeera</div>
+
+    <div class="kanal" onclick="ac('DW News','https://www.youtube.com/embed/live_stream?channel=UCknLrEdhRCp1aegoMqRaCZg')">DW News</div>
+
+    <div class="kanal" onclick="ac('Sky News','https://www.youtube.com/embed/live_stream?channel=UCoMdktPbSTixAyNGwb-UYkQ')">Sky News</div>
+
+    <div class="kanal" onclick="ac('NASA TV','https://www.youtube.com/embed/live_stream?channel=UCLA_DiR1FfKNvjuUpBHmylQ')">NASA TV</div>
+
+  </div>
+
+  <div class="sag">
+    <div class="baslik" id="baslik">TRT Haber</div>
+
+    <div class="video">
+      <iframe id="player"
+      src="https://www.youtube.com/embed/live_stream?channel=UC7fWeaHhqgM4Ry-RMpM2YYw&autoplay=1"
+      allowfullscreen></iframe>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function ac(ad, link){
+  document.getElementById("baslik").innerText = ad;
+  document.getElementById("player").src = link + "&autoplay=1";
+}
+</script>
+
+</body>
+</html>
