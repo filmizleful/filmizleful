@@ -623,6 +623,53 @@ function guncelle(){
 setInterval(guncelle, 3000);
 guncelle();
 </script>
+<div style="max-width:700px;margin:40px auto;padding:20px;background:#111;border-radius:15px;">
+    <h2>💬 Ziyaretçi Yorumları</h2>
 
+    <input id="yorumIsim" placeholder="Adın" style="width:100%;padding:10px;margin:5px 0;border-radius:10px;border:none;">
+    
+    <textarea id="yorumMetin" placeholder="Yorum yaz..." style="width:100%;padding:10px;margin:5px 0;border-radius:10px;border:none;"></textarea>
+    
+    <button onclick="yorumEkle()" style="padding:10px 20px;border:none;border-radius:10px;background:#ff6d7a;color:white;">Gönder</button>
+
+    <div id="yorumlar" style="margin-top:20px;"></div>
+</div>
+
+<script>
+function yorumEkle(){
+    let isim = document.getElementById("yorumIsim").value;
+    let metin = document.getElementById("yorumMetin").value;
+
+    if(isim=="" || metin==""){
+        alert("Boş bırakma");
+        return;
+    }
+
+    let yorumlar = JSON.parse(localStorage.getItem("yorumlar") || "[]");
+
+    yorumlar.push({isim, metin});
+
+    localStorage.setItem("yorumlar", JSON.stringify(yorumlar));
+
+    goster();
+}
+
+function goster(){
+    let yorumlar = JSON.parse(localStorage.getItem("yorumlar") || "[]");
+
+    let alan = document.getElementById("yorumlar");
+    alan.innerHTML="";
+
+    yorumlar.reverse().forEach(y=>{
+        alan.innerHTML += `
+        <div style="background:#222;padding:10px;margin:10px 0;border-radius:10px;">
+            <b>${y.isim}</b><br>
+            ${y.metin}
+        </div>`;
+    });
+}
+
+goster();
+</script>
 </body>
 </html>
