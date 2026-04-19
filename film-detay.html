@@ -144,15 +144,17 @@
       margin-bottom:8px;
     }
 
-    .oynatma-kutu{
+    .oynatma-kutu,
+    .yorum-kutu{
       background:#0b1220;
       border:1px solid rgba(255,255,255,0.08);
       border-radius:18px;
       padding:16px;
-      margin-top:8px;
+      margin-top:18px;
     }
 
-    .oynatma-kutu h3{
+    .oynatma-kutu h3,
+    .yorum-kutu h3{
       margin-bottom:14px;
       font-size:22px;
     }
@@ -215,6 +217,11 @@
       color:white;
     }
 
+    .btn-yesil{
+      background:#16a34a;
+      color:white;
+    }
+
     .btn:hover{
       transform:translateY(-1px);
       opacity:0.95;
@@ -246,6 +253,84 @@
       color:#d1d5db;
       line-height:1.7;
       margin-bottom:18px;
+    }
+
+    .izledim-durum{
+      margin-top:14px;
+      font-size:15px;
+      color:#86efac;
+      font-weight:bold;
+    }
+
+    .yorum-form{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .yorum-input,
+    .yorum-textarea{
+      width:100%;
+      border:none;
+      outline:none;
+      border-radius:12px;
+      padding:14px;
+      background:#1f2937;
+      color:white;
+      font-size:15px;
+    }
+
+    .yorum-textarea{
+      min-height:110px;
+      resize:vertical;
+    }
+
+    .yorum-listesi{
+      margin-top:18px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .yorum-item{
+      background:#1f2937;
+      border-radius:14px;
+      padding:14px;
+      border:1px solid rgba(255,255,255,0.06);
+    }
+
+    .yorum-ust{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:8px;
+      flex-wrap:wrap;
+    }
+
+    .yorum-ad{
+      font-weight:bold;
+      color:#fff;
+    }
+
+    .yorum-tarih{
+      font-size:13px;
+      color:#9ca3af;
+    }
+
+    .yorum-metin{
+      color:#d1d5db;
+      line-height:1.6;
+      white-space:pre-wrap;
+      word-break:break-word;
+    }
+
+    .yorum-yok{
+      background:#1f2937;
+      color:#cbd5e1;
+      border-radius:14px;
+      padding:16px;
+      text-align:center;
     }
 
     @media (max-width: 900px){
@@ -318,6 +403,33 @@
       }
     }
 
+    function izledimAnahtari(filmId){
+      return "izledim_" + filmId;
+    }
+
+    function yorumAnahtari(filmId){
+      return "yorumlar_" + filmId;
+    }
+
+    function tarihYazisiOlustur(){
+      const tarih = new Date();
+      const gun = String(tarih.getDate()).padStart(2, "0");
+      const ay = String(tarih.getMonth() + 1).padStart(2, "0");
+      const yil = tarih.getFullYear();
+      const saat = String(tarih.getHours()).padStart(2, "0");
+      const dakika = String(tarih.getMinutes()).padStart(2, "0");
+      return gun + "." + ay + "." + yil + " " + saat + ":" + dakika;
+    }
+
+    function guvenliMetin(metin){
+      return String(metin)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
     function videoKutusuOlustur(film){
       const fragmanLinki = film.fragman || "";
       const izleLinki = film.izle || "";
@@ -381,13 +493,141 @@
           ${videoHTML}
           <div class="butonlar">
             ${izleButonu}
+            <button class="btn btn-yesil" id="izledimBtn">✅ İzledim</button>
             <button class="btn btn-gri" onclick="history.back()">Geri Dön</button>
           </div>
+          <div class="izledim-durum" id="izledimDurum"></div>
           <div class="uyari">
             Not: Şu an sistem mevcut içerik yapını bozmadan fragman oynatır. Gerçek film linki eklersen “Filmi Aç” butonu da çalışır.
           </div>
         </div>
       `;
+    }
+
+    function yorumKutusuOlustur(){
+      return `
+        <div class="yorum-kutu">
+          <h3>Yorumlar</h3>
+
+          <div class="yorum-form">
+            <input type="text" id="yorumAd" class="yorum-input" placeholder="Adın">
+            <textarea id="yorumMetin" class="yorum-textarea" placeholder="Bu film hakkında yorumunu yaz..."></textarea>
+            <div class="butonlar">
+              <button class="btn btn-kirmizi" id="yorumGonderBtn">Yorumu Gönder</button>
+            </div>
+          </div>
+
+          <div class="yorum-listesi" id="yorumListesi"></div>
+        </div>
+      `;
+    }
+
+    function yorumlariGetir(filmId){
+      return JSON.parse(localStorage.getItem(yorumAnahtari(filmId))) || [];
+    }
+
+    function yorumlariKaydet(filmId, yorumlar){
+      localStorage.setItem(yorumAnahtari(filmId), JSON.stringify(yorumlar));
+    }
+
+    function yorumlariGoster(filmId){
+      const yorumListesi = document.getElementById("yorumListesi");
+      const yorumlar = yorumlariGetir(filmId);
+
+      if(!yorumlar.length){
+        yorumListesi.innerHTML = `
+          <div class="yorum-yok">Bu filme henüz yorum yapılmamış. İlk yorumu sen yaz.</div>
+        `;
+        return;
+      }
+
+      yorumListesi.innerHTML = yorumlar.map(function(yorum){
+        return `
+          <div class="yorum-item">
+            <div class="yorum-ust">
+              <div class="yorum-ad">${guvenliMetin(yorum.ad)}</div>
+              <div class="yorum-tarih">${guvenliMetin(yorum.tarih)}</div>
+            </div>
+            <div class="yorum-metin">${guvenliMetin(yorum.metin)}</div>
+          </div>
+        `;
+      }).reverse().join("");
+    }
+
+    function yorumSisteminiBaslat(film){
+      const yorumGonderBtn = document.getElementById("yorumGonderBtn");
+      const yorumAd = document.getElementById("yorumAd");
+      const yorumMetin = document.getElementById("yorumMetin");
+
+      const kayitliAd = localStorage.getItem("kullanici");
+      if(kayitliAd){
+        yorumAd.value = kayitliAd;
+      }
+
+      yorumlariGoster(film.id);
+
+      yorumGonderBtn.addEventListener("click", function(){
+        const ad = yorumAd.value.trim();
+        const metin = yorumMetin.value.trim();
+
+        if(!ad){
+          alert("Lütfen adını yaz.");
+          return;
+        }
+
+        if(!metin){
+          alert("Lütfen bir yorum yaz.");
+          return;
+        }
+
+        const yorumlar = yorumlariGetir(film.id);
+
+        yorumlar.push({
+          ad: ad,
+          metin: metin,
+          tarih: tarihYazisiOlustur()
+        });
+
+        yorumlariKaydet(film.id, yorumlar);
+        yorumMetin.value = "";
+        yorumlariGoster(film.id);
+      });
+    }
+
+    function izledimSisteminiBaslat(film){
+      const izledimBtn = document.getElementById("izledimBtn");
+      const izledimDurum = document.getElementById("izledimDurum");
+      const anahtar = izledimAnahtari(film.id);
+
+      function guncelle(){
+        const izlendiMi = localStorage.getItem(anahtar) === "true";
+
+        if(izlendiMi){
+          izledimBtn.innerText = "✅ İzledin";
+          izledimBtn.classList.remove("btn-yesil");
+          izledimBtn.classList.add("btn-gri");
+          izledimDurum.innerText = "Bu filmi izledim olarak işaretledin.";
+        }else{
+          izledimBtn.innerText = "✅ İzledim";
+          izledimBtn.classList.remove("btn-gri");
+          izledimBtn.classList.add("btn-yesil");
+          izledimDurum.innerText = "";
+        }
+      }
+
+      izledimBtn.addEventListener("click", function(){
+        const izlendiMi = localStorage.getItem(anahtar) === "true";
+
+        if(izlendiMi){
+          localStorage.removeItem(anahtar);
+        }else{
+          localStorage.setItem(anahtar, "true");
+        }
+
+        guncelle();
+      });
+
+      guncelle();
     }
 
     function filmDetayGoster(){
@@ -446,9 +686,13 @@
             </div>
 
             ${videoKutusuOlustur(film)}
+            ${yorumKutusuOlustur()}
           </div>
         </div>
       `;
+
+      izledimSisteminiBaslat(film);
+      yorumSisteminiBaslat(film);
     }
 
     filmDetayGoster();

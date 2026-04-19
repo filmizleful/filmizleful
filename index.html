@@ -164,7 +164,6 @@ body{
     font-size:17px;
 }
 
-/* ÜST REKLAM KUTUSU */
 .ust-reklam{
     max-width:900px;
     margin:8px auto 18px;
@@ -364,6 +363,7 @@ body{
     transition:0.35s;
     position:relative;
     overflow:hidden;
+    cursor:pointer;
 }
 
 .film::before{
@@ -429,6 +429,8 @@ body{
     border-radius:12px;
     font-weight:bold;
     transition:0.3s;
+    position:relative;
+    z-index:2;
 }
 
 .film a:hover{
@@ -448,6 +450,8 @@ body{
     font-weight:bold;
     cursor:pointer;
     transition:0.3s;
+    position:relative;
+    z-index:2;
 }
 
 .favori-buton:hover{
@@ -469,7 +473,6 @@ body{
     display:none;
 }
 
-/* ALT BÜYÜK REKLAM KUTUSU */
 .reklam-kutu{
     max-width:900px;
     margin:40px auto;
@@ -515,7 +518,6 @@ body{
     margin-top:20px;
 }
 
-/* XP KUTUSU */
 #lvlBox{
     position:fixed;
     bottom:20px;
@@ -576,7 +578,6 @@ body{
     transition:0.4s;
 }
 
-/* SAĞ ALT SABİT REKLAM */
 .reklam-sabit-btn{
     position:fixed;
     right:20px;
@@ -763,7 +764,6 @@ body{
     </div>
 </div>
 
-
 <div class="arama-alani">
     <input type="text" id="aramaInput" placeholder="Film veya kategori ara..." onkeyup="filmleriAra()">
 </div>
@@ -820,62 +820,63 @@ body{
 <div class="baslik" id="filmler">🎟️ Popüler Filmler</div>
 
 <div class="filmler">
-    <div class="film arama-ogesi" data-ara="john wick aksiyon 2014 keanu reeves">
+    <div class="film arama-ogesi" data-link="film-detay.html?id=john-wick" data-ara="john wick aksiyon 2014 keanu reeves">
         <img src="https://image.tmdb.org/t/p/w500/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg" alt="John Wick">
         <h3>John Wick</h3>
         <div class="film-bilgi">Aksiyon • 2014</div>
         <div class="film-puan">⭐ IMDb 7.4</div>
         <a href="film-detay.html?id=john-wick">İzle</a>
-        <button class="favori-buton" onclick="favoriEkle(this,'john-wick','John Wick','Aksiyon • 2014','https://image.tmdb.org/t/p/w500/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg')">❤️ Favoriye Ekle</button>
+        <button class="favori-buton" onclick="event.stopPropagation(); favoriEkle(this,'john-wick','John Wick','Aksiyon • 2014','https://image.tmdb.org/t/p/w500/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg')">❤️ Favoriye Ekle</button>
     </div>
 
-    <div class="film arama-ogesi" data-ara="batman aksiyon 2022 robert pattinson">
+    <div class="film arama-ogesi" data-link="film-detay.html?id=batman" data-ara="batman aksiyon 2022 robert pattinson">
         <img src="https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg" alt="Batman">
         <h3>Batman</h3>
         <div class="film-bilgi">Aksiyon • 2022</div>
         <div class="film-puan">⭐ IMDb 7.8</div>
         <a href="film-detay.html?id=batman">İzle</a>
-        <button class="favori-buton" onclick="favoriEkle(this,'batman','Batman','Aksiyon • 2022','https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg')">❤️ Favoriye Ekle</button>
+        <button class="favori-buton" onclick="event.stopPropagation(); favoriEkle(this,'batman','Batman','Aksiyon • 2022','https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg')">❤️ Favoriye Ekle</button>
     </div>
 
-    <div class="film arama-ogesi" data-ara="mad max fury road aksiyon 2015">
+    <div class="film arama-ogesi" data-link="film-detay.html?id=madmax" data-ara="mad max fury road aksiyon 2015">
         <img src="https://image.tmdb.org/t/p/w500/8tZYtuWezp8JbcsvHYO0O46tFbo.jpg" alt="Mad Max">
         <h3>Mad Max</h3>
         <div class="film-bilgi">Aksiyon • 2015</div>
         <div class="film-puan">⭐ IMDb 8.1</div>
-        <a href="film-detay.html?id=mad-max">İzle</a>
-        <button class="favori-buton" onclick="favoriEkle(this,'mad-max','Mad Max','Aksiyon • 2015','https://image.tmdb.org/t/p/w500/8tZYtuWezp8JbcsvHYO0O46tFbo.jpg')">❤️ Favoriye Ekle</button>
+        <a href="film-detay.html?id=madmax">İzle</a>
+        <button class="favori-buton" onclick="event.stopPropagation(); favoriEkle(this,'madmax','Mad Max','Aksiyon • 2015','https://image.tmdb.org/t/p/w500/8tZYtuWezp8JbcsvHYO0O46tFbo.jpg')">❤️ Favoriye Ekle</button>
     </div>
 
-    <div class="film arama-ogesi" data-ara="interstellar bilim kurgu 2014 uzay nolan">
+    <div class="film arama-ogesi" data-link="film-detay.html?id=interstellar" data-ara="interstellar bilim kurgu 2014 uzay nolan">
         <img src="https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg" alt="Interstellar">
         <h3>Interstellar</h3>
         <div class="film-bilgi">Bilim Kurgu • 2014</div>
         <div class="film-puan">⭐ IMDb 8.7</div>
         <a href="film-detay.html?id=interstellar">İzle</a>
-        <button class="favori-buton" onclick="favoriEkle(this,'interstellar','Interstellar','Bilim Kurgu • 2014','https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg')">❤️ Favoriye Ekle</button>
+        <button class="favori-buton" onclick="event.stopPropagation(); favoriEkle(this,'interstellar','Interstellar','Bilim Kurgu • 2014','https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg')">❤️ Favoriye Ekle</button>
     </div>
 
-    <div class="film arama-ogesi" data-ara="the conjuring korku 2013 gerilim">
+    <div class="film arama-ogesi" data-link="film-detay.html?id=conjuring" data-ara="the conjuring korku 2013 gerilim">
         <img src="https://image.tmdb.org/t/p/w500/wVYREutTvI2tmxr6ujrHT704wGF.jpg" alt="The Conjuring">
         <h3>The Conjuring</h3>
         <div class="film-bilgi">Korku • 2013</div>
         <div class="film-puan">⭐ IMDb 7.5</div>
-        <a href="film-detay.html?id=the-conjuring">İzle</a>
-        <button class="favori-buton" onclick="favoriEkle(this,'the-conjuring','The Conjuring','Korku • 2013','https://image.tmdb.org/t/p/w500/wVYREutTvI2tmxr6ujrHT704wGF.jpg')">❤️ Favoriye Ekle</button>
+        <a href="film-detay.html?id=conjuring">İzle</a>
+        <button class="favori-buton" onclick="event.stopPropagation(); favoriEkle(this,'conjuring','The Conjuring','Korku • 2013','https://image.tmdb.org/t/p/w500/wVYREutTvI2tmxr6ujrHT704wGF.jpg')">❤️ Favoriye Ekle</button>
     </div>
 
-    <div class="film arama-ogesi" data-ara="avatar macera bilim kurgu 2009">
+    <div class="film arama-ogesi" data-link="film-detay.html?id=avatar" data-ara="avatar macera bilim kurgu 2009">
         <img src="https://image.tmdb.org/t/p/w500/kyeqWdyUXW608qlYkRqosgbbJyK.jpg" alt="Avatar">
         <h3>Avatar</h3>
         <div class="film-bilgi">Macera • 2009</div>
         <div class="film-puan">⭐ IMDb 7.9</div>
         <a href="film-detay.html?id=avatar">İzle</a>
-        <button class="favori-buton" onclick="favoriEkle(this,'avatar','Avatar','Macera • 2009','https://image.tmdb.org/t/p/w500/kyeqWdyUXW608qlYkRqosgbbJyK.jpg')">❤️ Favoriye Ekle</button>
+        <button class="favori-buton" onclick="event.stopPropagation(); favoriEkle(this,'avatar','Avatar','Macera • 2009','https://image.tmdb.org/t/p/w500/kyeqWdyUXW608qlYkRqosgbbJyK.jpg')">❤️ Favoriye Ekle</button>
     </div>
 </div>
 
 <div class="sonuc-yok" id="sonucYok">Aramana uygun sonuç bulunamadı.</div>
+
 <div class="alt">
     © 2026 Filmizleful
 </div>
@@ -1055,6 +1056,28 @@ function reklamKutusuAcKapat(){
 function reklamKutusuKapat(){
     document.getElementById("reklamBilgiKutu").style.display = "none";
 }
+</script>
+
+<script>
+function filmKartlariniHazirla(){
+    document.querySelectorAll(".film").forEach(function(kart){
+        kart.addEventListener("click", function(e){
+            if(e.target.tagName.toLowerCase() === "button"){
+                return;
+            }
+            if(e.target.tagName.toLowerCase() === "a"){
+                return;
+            }
+
+            const link = kart.getAttribute("data-link");
+            if(link){
+                window.location.href = link;
+            }
+        });
+    });
+}
+
+filmKartlariniHazirla();
 </script>
 
 </body>
