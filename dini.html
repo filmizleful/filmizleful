@@ -93,11 +93,17 @@ body{
   border-radius:14px;
   margin-bottom:12px;
   display:block;
+  background:#111;
 }
 
 .film h3{
   margin:0 0 8px;
   font-size:22px;
+  min-height:54px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
 }
 
 .film-bilgi{
@@ -129,6 +135,16 @@ body{
   opacity:0.95;
 }
 
+.bos-mesaj{
+  width:100%;
+  text-align:center;
+  color:#d1d5db;
+  font-size:20px;
+  padding:40px 20px;
+  background:rgba(255,255,255,0.04);
+  border-radius:20px;
+}
+
 @media(max-width:700px){
   .film{
     width:100%;
@@ -156,50 +172,65 @@ body{
   <div class="baslik">🕌 Dini Filmler</div>
   <div class="alt-yazi">İslami ve tarihi yapımlar burada.</div>
 
-  <div class="filmler">
-
-    <div class="film">
-      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='600'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop stop-color='%23281b4d'/><stop offset='1' stop-color='%237c3aed'/></linearGradient></defs><rect width='100%' height='100%' fill='url(%23g)'/><text x='50%' y='42%' text-anchor='middle' fill='white' font-size='44' font-family='Arial' font-weight='bold'>CAGRI</text><text x='50%' y='51%' text-anchor='middle' fill='%23f8e7b0' font-size='24' font-family='Arial'>Dini Film</text><text x='50%' y='82%' text-anchor='middle' fill='white' font-size='28' font-family='Arial'>Filmizleful</text></svg>" alt="Çağrı">
-      <h3>Çağrı</h3>
-      <div class="film-bilgi">Dini • 1976</div>
-      <div class="film-puan">⭐ IMDb 8.5</div>
-      <a href="film-detay.html?id=cagri">İzle</a>
-    </div>
-
-    <div class="film">
-      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='600'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop stop-color='%233b1f12'/><stop offset='1' stop-color='%23b45309'/></linearGradient></defs><rect width='100%' height='100%' fill='url(%23g)'/><text x='50%' y='40%' text-anchor='middle' fill='white' font-size='34' font-family='Arial' font-weight='bold'>ALLAHIN</text><text x='50%' y='49%' text-anchor='middle' fill='white' font-size='42' font-family='Arial' font-weight='bold'>ELCISI</text><text x='50%' y='82%' text-anchor='middle' fill='%23fde68a' font-size='28' font-family='Arial'>Filmizleful</text></svg>" alt="Allah'ın Elçisi">
-      <h3>Allah'ın Elçisi</h3>
-      <div class="film-bilgi">Dini • 2015</div>
-      <div class="film-puan">⭐ IMDb 6.8</div>
-      <a href="film-detay.html?id=allahinelcisi">İzle</a>
-    </div>
-
-    <div class="film">
-      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='600'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop stop-color='%231f2937'/><stop offset='1' stop-color='%230f766e'/></linearGradient></defs><rect width='100%' height='100%' fill='url(%23g)'/><text x='50%' y='42%' text-anchor='middle' fill='white' font-size='34' font-family='Arial' font-weight='bold'>ISLAM</text><text x='50%' y='50%' text-anchor='middle' fill='white' font-size='34' font-family='Arial' font-weight='bold'>TARIHI</text><text x='50%' y='82%' text-anchor='middle' fill='white' font-size='28' font-family='Arial'>Filmizleful</text></svg>" alt="İslam Tarihi Belgeseli">
-      <h3>İslam Tarihi</h3>
-      <div class="film-bilgi">Dini • 2010</div>
-      <div class="film-puan">⭐ IMDb 8.0</div>
-      <a href="film-detay.html?id=islamhikayesi">İzle</a>
-    </div>
-
-    <div class="film">
-      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='600'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop stop-color='%232d1b69'/><stop offset='1' stop-color='%235b21b6'/></linearGradient></defs><rect width='100%' height='100%' fill='url(%23g)'/><text x='50%' y='42%' text-anchor='middle' fill='white' font-size='34' font-family='Arial' font-weight='bold'>OSMANLI</text><text x='50%' y='50%' text-anchor='middle' fill='white' font-size='28' font-family='Arial' font-weight='bold'>BELGESELI</text><text x='50%' y='82%' text-anchor='middle' fill='%23e9d5ff' font-size='28' font-family='Arial'>Filmizleful</text></svg>" alt="Osmanlı Belgeseli">
-      <h3>Osmanlı</h3>
-      <div class="film-bilgi">Tarihi • 2013</div>
-      <div class="film-puan">⭐ IMDb 7.8</div>
-      <a href="film-detay.html?id=osmanli">İzle</a>
-    </div>
-
-    <div class="film">
-      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='600'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop stop-color='%2329240f'/><stop offset='1' stop-color='%23a16207'/></linearGradient></defs><rect width='100%' height='100%' fill='url(%23g)'/><text x='50%' y='42%' text-anchor='middle' fill='white' font-size='34' font-family='Arial' font-weight='bold'>MEKKENIN</text><text x='50%' y='50%' text-anchor='middle' fill='white' font-size='34' font-family='Arial' font-weight='bold'>FETHI</text><text x='50%' y='82%' text-anchor='middle' fill='%23fef3c7' font-size='28' font-family='Arial'>Filmizleful</text></svg>" alt="Mekke'nin Fethi">
-      <h3>Mekke'nin Fethi</h3>
-      <div class="film-bilgi">Dini • 2018</div>
-      <div class="film-puan">⭐ IMDb 6.9</div>
-      <a href="film-detay.html?id=mekkefethi">İzle</a>
-    </div>
-
-  </div>
+  <div class="filmler" id="diniFilmlerAlani"></div>
 </div>
+
+<script src="filmler.js"></script>
+<script>
+const alan = document.getElementById("diniFilmlerAlani");
+
+function guvenliYazi(metin){
+  return String(metin || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function yedekAfis(filmAdi){
+  const ad = String(filmAdi || "Film").substring(0, 28);
+
+  return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" width="400" height="600">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#241a3a"/>
+          <stop offset="100%" stop-color="#7c3aed"/>
+        </linearGradient>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#g)"/>
+      <text x="50%" y="42%" text-anchor="middle" fill="white" font-size="30" font-family="Arial" font-weight="bold">${ad}</text>
+      <text x="50%" y="51%" text-anchor="middle" fill="#f8e7b0" font-size="22" font-family="Arial">Dini Film</text>
+      <text x="50%" y="84%" text-anchor="middle" fill="white" font-size="26" font-family="Arial">Filmizleful</text>
+    </svg>
+  `);
+}
+
+const diniFilmler = FILMLER.filter(film => film.tur && film.tur.toLowerCase() === "dini");
+
+if(diniFilmler.length === 0){
+  alan.innerHTML = `<div class="bos-mesaj">Henüz dini film eklenmedi.</div>`;
+}else{
+  alan.innerHTML = diniFilmler.map(film => {
+    const isim = guvenliYazi(film.isim);
+    const meta = guvenliYazi(film.meta || (film.tur + " • " + film.yil));
+    const puan = guvenliYazi(film.puan || "-");
+    const afis = film.afis ? guvenliYazi(film.afis) : yedekAfis(film.isim);
+    const fallback = yedekAfis(film.isim);
+
+    return `
+      <div class="film">
+        <img src="${afis}" alt="${isim}" onerror="this.onerror=null; this.src='${fallback}'">
+        <h3>${isim}</h3>
+        <div class="film-bilgi">${meta}</div>
+        <div class="film-puan">⭐ IMDb ${puan}</div>
+        <a href="film-detay.html?id=${film.id}">İzle</a>
+      </div>
+    `;
+  }).join("");
+}
+</script>
 
 </body>
 </html>

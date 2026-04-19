@@ -577,62 +577,96 @@ izle:"#"
 },
 
 {
-id:"cagri", isim:"Çağrı", tur:"dini", yil:"1976", puan:"8.5",
-afis:"https://image.tmdb.org/t/p/w500/6v7s1QyQ0VykBLL8GMDIS9ZhDJW.jpg",
-ara:"cagri dini film islam",
+id:"hzsuleyman", isim:"Hz Suleyman", tur:"dini", yil:"-", puan:"-",
+afis:"resimler/hz-suleyman.jpg",
+ara:"hz suleyman dini film",
+meta:"Dini Film",
+ozet:"Hz Süleyman'ın hayatını anlatır.",
+hakkinda1:"Dini içerik.",
+hakkinda2:"Tarihi anlatım.",
+fragman:"https://www.youtube.com/watch?v=TZEgcntD4Mc",
+izle:"#"
+},
+
+{
+id:"cagri", isim:"Cagrı", tur:"dini", yil:"1976", puan:"8.5",
+afis:"resimler/cagri.jpg",
 meta:"Dini • IMDb 8.5",
 ozet:"İslam'ın doğuşunu anlatan klasik film.",
 hakkinda1:"En bilinen dini yapım.",
 hakkinda2:"Uluslararası kaliteli film.",
-fragman:"https://www.youtube.com/watch?v=5zMf9c8v9Eo",
+fragman:"https://www.youtube.com/watch?v=kp1XTsmfvsQ",
 izle:"#"
 },
 
 {
-id:"allahinelcisi", isim:"Allah'ın Elçisi", tur:"dini", yil:"2015", puan:"6.8",
-afis:"https://image.tmdb.org/t/p/w500/7pH9ZzY9x7X2bQVWwtIg9Y9ycYk.jpg",
-ara:"allahin elcisi film",
-meta:"Dini • IMDb 6.8",
-ozet:"Peygamberimizin çocukluk dönemini anlatır.",
-hakkinda1:"İran yapımı film.",
-hakkinda2:"Görsel olarak güçlü.",
-fragman:"https://www.youtube.com/watch?v=0z4x6r7QYpY",
+id:"hzmusa", isim:"Hz Musa", tur:"dini", yil:"-", puan:"-",
+afis:"resimler/hz-musa.jpg",
+ara:"hz musa dini film",
+meta:"Dini Film",
+ozet:"Hz Musa'nın hayatını anlatır.",
+hakkinda1:"Dini içerik.",
+hakkinda2:"Tarihi anlatım.",
+fragman:"https://www.youtube.com/watch?v=1i7_aQaxq2s",
 izle:"#"
 },
 
 {
-id:"islamhikayesi", isim:"İslam Tarihi Belgeseli", tur:"dini", yil:"2010", puan:"8.0",
-afis:"https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkC1b5bZG9xj9l9P.jpg",
-ara:"islam tarihi belgesel",
-meta:"Dini • IMDb 8.0",
-ozet:"İslam tarihini anlatan kapsamlı belgesel.",
-hakkinda1:"Bilgilendirici içerik.",
-hakkinda2:"Belgesel tarzı.",
-fragman:"https://www.youtube.com/watch?v=H4y8J5iW8lE",
+id:"hzmuhammet", isim:"Hz Muhamet", tur:"dini", yil:"-", puan:"-",
+afis:"resimler/hz-muhamet.jpg",
+ara:"hz muhammet dini film",
+meta:"Dini Film",
+ozet:"Hz Muhammed'in hayatı.",
+hakkinda1:"Dini içerik.",
+hakkinda2:"Tarihi anlatım.",
+fragman:"https://www.youtube.com/watch?v=9DieMoGAPkk",
 izle:"#"
 },
 
 {
-id:"osmanli", isim:"Osmanlı Belgeseli", tur:"dini", yil:"2013", puan:"7.8",
-afis:"https://image.tmdb.org/t/p/w500/8zv5gZbZlZTa3YL6hFLaNpL5MIc.jpg",
-ara:"osmanli belgesel",
-meta:"Tarihi • IMDb 7.8",
-ozet:"Osmanlı'nın kuruluşunu anlatır.",
-hakkinda1:"Tarihi içerik.",
-hakkinda2:"Belgesel anlatım.",
-fragman:"https://www.youtube.com/watch?v=Yq2z1z7R9Xw",
+id:"hzomer", isim:"Hz Ömerin Hayatı", tur:"dini", yil:"-", puan:"-",
+afis:"resimler/hz-omer.jpg",
+ara:"hz omer dini film",
+meta:"Dini Film",
+ozet:"Hz Ömer'in hayatı.",
+hakkinda1:"Dini içerik.",
+hakkinda2:"Tarihi anlatım.",
+fragman:"https://www.youtube.com/watch?v=xZzWeOgPdfk",
 izle:"#"
 },
 
 {
-id:"mekkefethi", isim:"Mekke'nin Fethi", tur:"dini", yil:"2018", puan:"6.9",
-afis:"https://image.tmdb.org/t/p/w500/5k5G3kG2W2G2W2G2W2.jpg",
-ara:"mekke fethi islam",
-meta:"Dini • IMDb 6.9",
-ozet:"İslam tarihinin önemli olaylarından biri.",
-hakkinda1:"Tarihi anlatım.",
-hakkinda2:"Dini içerik.",
-fragman:"https://www.youtube.com/watch?v=V8c9xYwW5nA",
+id:"hzyusuf", isim:"Hz Yusuf", tur:"dini", yil:"-", puan:"-",
+afis:"resimler/hz-yusuf.jpg",
+meta:"Dini Film",
+ozet:"Hz Yusuf'un hayatı.",
+hakkinda1:"Dini içerik.",
+hakkinda2:"Tarihi anlatım.",
+fragman:"https://www.youtube.com/watch?v=7loRubAeJ58",
+izle:"#"
+},
+
+{
+id:"hzali", isim:"Hz Alinin Hayatı", tur:"dini", yil:"-", puan:"-",
+afis:"resimler/hz-ali.jpg",
+ara:"hz ali dini film",
+meta:"Dini Film",
+ozet:"Hz Ali'nin hayatı.",
+hakkinda1:"Dini içerik.",
+hakkinda2:"Tarihi anlatım.",
+fragman:"https://www.youtube.com/watch?v=zd3TM0f2bQ8",
+izle:"#"
+},
+
+{
+id:"hzebubekir", isim:"Hz Ebubekirin Hayatı", tur:"dini", yil:"-", puan:"-",
+afis:"resimler/hz-ebubekir.jpg",
+ara:"hz ebubekir dini film",
+meta:"Dini Film",
+ozet:"Hz Ebubekir'in hayatı.",
+hakkinda1:"Dini içerik.",
+hakkinda2:"Tarihi anlatım.",
+fragman:"https://www.youtube.com/watch?v=KqYinYJEIx",
 izle:"#"
 },
 
