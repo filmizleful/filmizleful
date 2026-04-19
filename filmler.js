@@ -634,8 +634,91 @@ hakkinda1:"Dini ve tarihi içerik.",
 hakkinda2:"Anlamlı bir yapım.",
 fragman:"https://www.youtube.com/watch?v=9nN8fF0LJ0Q",
 izle:"#"
-}
+},
 
+{
+id:"findingnemo", isim:"Finding Nemo", tur:"animasyon", yil:"2003", puan:"8.2",
+afis:"https://image.tmdb.org/t/p/w500/4m1Au3YkjqsxF8iwQy0fPYSxE0h.jpg",
+ara:"finding nemo animasyon",
+meta:"Animasyon • IMDb 8.2",
+ozet:"Kaybolan küçük balığı bulmak için çıkan büyük yolculuk.",
+hakkinda1:"Pixar klasiği.",
+hakkinda2:"Aile dostu çok sevilen animasyon.",
+fragman:"https://www.youtube.com/watch?v=9oQ628Seb9w",
+izle:"#"
+},
+
+{
+id:"toystory", isim:"Toy Story", tur:"animasyon", yil:"1995", puan:"8.3",
+afis:"https://image.tmdb.org/t/p/w500/uXDfjJbdP4ijW5hWSBrPrlKpxab.jpg",
+ara:"toy story animasyon",
+meta:"Animasyon • IMDb 8.3",
+ozet:"Oyuncakların gizli hayatı.",
+hakkinda1:"Pixar klasiği.",
+hakkinda2:"Çok eğlenceli.",
+fragman:"https://www.youtube.com/watch?v=v-PjgYDrg70",
+izle:"#"
+},
+
+{
+id:"lionking", isim:"Aslan Kral", tur:"animasyon", yil:"1994", puan:"8.5",
+afis:"https://image.tmdb.org/t/p/w500/sKCr78MXSLixwmZ8DyJLrpMsd15.jpg",
+ara:"aslan kral animasyon",
+meta:"Animasyon • IMDb 8.5",
+ozet:"Simba'nın büyüme hikayesi.",
+hakkinda1:"Disney klasiği.",
+hakkinda2:"Çok sevilen animasyon.",
+fragman:"https://www.youtube.com/watch?v=4sj1MT05lAA",
+izle:"#"
+},
+
+{
+id:"shrek", isim:"Shrek", tur:"animasyon", yil:"2001", puan:"7.9",
+afis:"https://image.tmdb.org/t/p/w500/iB64vpL3dIObOtMZgX3RqdVdQDc.jpg",
+ara:"shrek animasyon",
+meta:"Animasyon • IMDb 7.9",
+ozet:"Yeşil devin komik macerası.",
+hakkinda1:"Komedi dolu animasyon.",
+hakkinda2:"Çok popüler seri.",
+fragman:"https://www.youtube.com/watch?v=CwXOrWvPBPk",
+izle:"#"
+},
+
+{
+id:"cars", isim:"Cars", tur:"animasyon", yil:"2006", puan:"7.2",
+afis:"https://image.tmdb.org/t/p/w500/qa6HCwP4Z15l3hpsASz3auugEW6.jpg",
+ara:"cars animasyon",
+meta:"Animasyon • IMDb 7.2",
+ozet:"Yarış dünyasında geçen eğlenceli hikaye.",
+hakkinda1:"Pixar filmi.",
+hakkinda2:"Çocukların sevdiği animasyon.",
+fragman:"https://www.youtube.com/watch?v=SbXIj2T-_uk",
+izle:"#"
+},
+
+{
+id:"frozen", isim:"Frozen", tur:"animasyon", yil:"2013", puan:"7.4",
+afis:"https://image.tmdb.org/t/p/w500/kgwjIb2JDHRhNk13lmSxiClFjVk.jpg",
+ara:"frozen animasyon",
+meta:"Animasyon • IMDb 7.4",
+ozet:"Elsa ve Anna'nın hikayesi.",
+hakkinda1:"Disney yapımı.",
+hakkinda2:"Çok ünlü animasyon.",
+fragman:"https://www.youtube.com/watch?v=TbQm5doF_Uc",
+izle:"#"
+},
+
+{
+id:"findingnemo", isim:"Finding Nemo", tur:"animasyon", yil:"2003", puan:"8.2",
+afis:"https://image.tmdb.org/t/p/w500/4m1Au3YkjqsxF8iwQy0fPYSxE0h.jpg",
+ara:"finding nemo animasyon",
+meta:"Animasyon • IMDb 8.2",
+ozet:"Kaybolan küçük balığı bulmak için çıkan büyük yolculuk.",
+hakkinda1:"Pixar klasiği.",
+hakkinda2:"Aile dostu çok sevilen animasyon.",
+fragman:"https://www.youtube.com/watch?v=9oQ628Seb9w",
+izle:"#"
+}
 ];
 
 function filmBul(id){
