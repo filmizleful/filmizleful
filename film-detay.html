@@ -948,7 +948,7 @@
         return;
       }
 
-      document.title = film.isim + " - Filmizleful";
+      document.title = film.isim + " Fragman İzle | Filmizleplusx";
 
       const desc = document.querySelector('meta[name="description"]');
       if(desc) desc.setAttribute("content", film.ozet || film.isim + " filmi hakkında bilgi");
@@ -957,7 +957,7 @@
       if(canonical) canonical.setAttribute("href", window.location.href);
 
       const ogTitle = document.querySelector('meta[property="og:title"]');
-      if(ogTitle) ogTitle.setAttribute("content", film.isim + " - Filmizleful");
+      if(ogTitle) ogTitle.setAttribute("content", film.isim + " Fragman İzle | Filmizleplusx");
 
       const ogDesc = document.querySelector('meta[property="og:description"]');
       if(ogDesc) ogDesc.setAttribute("content", film.ozet || "");
@@ -978,7 +978,7 @@
               <span class="etiket">${film.tur || "Film"}</span>
               <span class="etiket">${film.yil || "-"}</span>
               <span class="etiket">IMDb ${film.puan || "-"}</span>
-              <span class="etiket">${film.meta || "Filmizleful"}</span>
+              <span class="etiket">${film.meta || "Filmizleplusx"}</span>
             </div>
 
             <div class="film-ozet">
