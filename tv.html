@@ -164,6 +164,14 @@ body{
       <div class="alt" id="aciklama">
         Kanalı izlemek için aşağıdaki butona bas. Bu sistem YouTube embed hatası vermez; kanalı direkt açar.
       </div>
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:15px;margin-bottom:15px;background:#000;">
+  <iframe id="tvPlayer"
+    src=""
+    style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+    allow="autoplay; encrypted-media; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
 
       <div class="butonlar">
         <a id="izleBtn" class="btn" href="https://www.youtube.com/@trthaber/live" target="_blank">YouTube'da Aç</a>
@@ -221,12 +229,28 @@ const izleBtn = document.getElementById("izleBtn");
 const kanalBtn = document.getElementById("kanalBtn");
 const durum = document.getElementById("durum");
 
+function youtubeEmbedLink(link){
+  if(!link) return "";
+
+  const match = link.match(/youtube\.com\/@([^/]+)\/live/);
+  if(match){
+    return "https://www.youtube.com/embed/live_stream?channel=@" + match[1];
+  }
+
+  return link;
+}
+
 function sec(ad, live, kanal){
   baslik.textContent = ad;
   izleBtn.href = live;
   kanalBtn.href = kanal;
   durum.textContent = "Seçili kanal: " + ad;
-  aciklama.textContent = ad + " kanalını izlemek için 'YouTube'da Aç' butonuna bas.";
+  aciklama.textContent = ad + " kanalını site içinde açmayı deniyoruz. Açılmazsa YouTube'da Aç butonunu kullan.";
+
+  const player = document.getElementById("tvPlayer");
+  if(player){
+    player.src = youtubeEmbedLink(live);
+  }
 }
 
 function kanalElemaniOlustur(item){
@@ -252,6 +276,7 @@ function listele(q = ""){
 
 arama.addEventListener("input", e => listele(e.target.value));
 listele();
+sec("TRT Haber", "https://www.youtube.com/@trthaber/live", "https://www.youtube.com/@trthaber");
 </script>
 
 </body>
