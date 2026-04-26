@@ -1,14 +1,27 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title id="filmTitle">Film Fragman İzle | Filmizleplusx</title>
+<meta name="description" content="Film fragmanını izle, film konusu ve detaylarını keşfet. En yeni ve popüler film fragmanları Filmizleplusx’te.">
+<meta name="keywords" content="film fragman izle, film detay, film konusu, yeni film fragmanları, filmizleplusx">
+<meta name="robots" content="index, follow">
+
 <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-D31XG2S5XR"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D31XG2SX5R"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-D31XG2S5XR');
+  gtag('config', 'G-D31XG2SX5R');
 </script>
+
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8052755626891508"
+     crossorigin="anonymous"></script>
+</head>
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -1007,6 +1020,28 @@ film.isim + " fragmanını izleyebileceğiniz bu sayfada film konusu, oyuncular 
 
     filmDetayGoster();
   </script>
+<script>
+function seoGuncelle(filmAdi){
+    document.title = filmAdi + " Fragman İzle | Filmizleplusx";
+
+    const desc = document.querySelector('meta[name="description"]');
+    if(desc){
+        desc.setAttribute("content", filmAdi + " fragmanını izle, konusu ve detaylarını keşfet. En yeni film fragmanları Filmizleplusx'te.");
+    }
+}
+
+// URL'den film id al
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+// filmler.js varsa oradan bul
+if(typeof FILMLER !== "undefined"){
+    const film = FILMLER.find(f => f.id === id);
+    if(film){
+        seoGuncelle(film.isim);
+    }
+}
+</script>
 
 </body>
 </html>
