@@ -22,6 +22,60 @@
      crossorigin="anonymous"></script>
 
 <style>
+/* TÜM PANELİ VE İÇERİĞİ TERTEMİZ DÜZELTEN TEK KOD */
+.kapak {
+    position: relative !important;
+    display: flex !important;
+    align-items: center; /* Dikeyde ortalar */
+    justify-content: center; /* Yatayda ortalar */
+    min-height: 420px !important; /* Panelin boyu */
+    padding: 20px;
+    overflow: visible !important; /* İçeriğin dışa taşmasını engeller */
+}
+
+.kapak-icerik {
+    text-align: center !important; /* Yazıları ve butonları ortalar */
+    width: 100%;
+}
+
+.kapak-butonlar, .ek-ozellikler-yeni {
+    display: flex !important;
+    justify-content: center !important; /* Butonları ve 4'lü kutuları merkeze çeker */
+    gap: 15px;
+}
+
+.kapak-butonlar, .ek-ozellikler-yeni {
+    justify-content: center !important;
+}
+
+.ust-minik-sayaclar {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    display: flex;
+    gap: 12px; /* Kutuların arasını açtık */
+    z-index: 100;
+}
+
+.minik-s {
+    background: rgba(0, 0, 0, 0.7); /* Daha belirgin siyah arka plan */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 16px; /* Kutuları büyüttük */
+    border-radius: 14px; /* Köşeleri biraz daha yuvarladık */
+    font-size: 14px; /* Yazıları 11'den 14'e çıkardık */
+    font-weight: 800; /* Yazıları iyice kalınlaştırdık */
+    color: #ffe0a8; /* Altın sarısı/krem tonu */
+    backdrop-filter: blur(8px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    white-space: nowrap; /* Yazıların alt alta binmesini önler */
+}
+/* Turuncu noktanın yanıp sönmesini sağlayan efekt */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
 *{
   box-sizing:border-box;
 }
@@ -172,6 +226,69 @@ body{
 .kapak-buton:hover{
     transform:scale(1.04);
 }
+/* Kutuları ve metni düzelten özel ayar */
+.kapak-icerik {
+    max-width: 1200px !important;
+    width: 100% !important;
+}
+/* --- GÖRSELDEKİ YAN YANA KUTU TASARIMI --- */
+.ek-ozellikler-yeni {
+    display: flex !important;
+    gap: 15px;
+    margin-top: 25px;
+    width: 100%;
+}
+
+.ozellik-kart-yeni {
+    flex: 1;
+    background: #111827; /* Görseldeki koyu siyah ton */
+    padding: 18px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.ozellik-kart-yeni h4 { 
+    margin: 0 0 15px 0; 
+    font-size: 13px; 
+    color: #fff; 
+    display: flex; 
+    align-items: center; 
+    gap: 6px; 
+}
+
+.ozellik-kart-yeni input {
+    width: 100%; 
+    padding: 10px; 
+    border-radius: 8px; 
+    border: none; 
+    background: rgba(255, 255, 255, 0.05); 
+    color: white; 
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+
+.ozellik-kart-yeni button {
+    width: 100%; 
+    border: none; 
+    padding: 10px; 
+    border-radius: 10px; 
+    color: white; 
+    font-weight: bold; 
+    cursor: pointer; 
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+/* Buton Renkleri */
+.btn-pembe { background: #ff4d6d !important; }
+.btn-mavi { background: #00b4d8 !important; }
+.btn-mor { background: #7209b7 !important; }
+.btn-yesil { background: #2b9348 !important; }
+
+.ozellik-kart-yeni button:hover { opacity: 0.9; transform: translateY(-2px); }
 
 .hero{
     text-align:center;
@@ -793,19 +910,16 @@ body{
     color:#ffe0a8;
     font-weight:bold;
 }
-.yeni-kutu{
-    background: linear-gradient(135deg, #00c6ff, #0072ff);
-    box-shadow: 0 0 20px rgba(0, 114, 255, 0.6);
-    transform: scale(1.05);
-}
-
-.yeni-kutu:hover{
-    transform: scale(1.1);
-}
 </style>
 </head>
 <body>
+<div style="display:flex; gap:20px; align-items:center; padding:15px 25px; background:#0b0b14; border-bottom:1px solid rgba(255,255,255,0.1);">
 
+
+<a href="https://translate.google.com/translate?sl=tr&tl=en&u=https://filmizleplusx.com/" target="_blank" style="color:#00c6ff; text-decoration:none;">🌍 English</a>
+
+
+</div>
 <div class="ustbar">
     <div class="logo">🎬 Filmizleplusx</div>
 
@@ -825,28 +939,60 @@ body{
 
 <div class="kapak-alan">
     <div class="kapak">
+        <!-- SAĞ ÜST SAYAÇLAR (PANELİN İÇİNDE KALACAK) -->
+        <div class="ust-minik-sayaclar">
+            <div class="minik-s">🟢 <span id="canliIzleyici">124</span> Online</div>
+            <div class="minik-s">🔥 <span id="canliFilm">63+</span> Film</div>
+            <div class="minik-s">💬 <span id="canliMesaj">330</span> Mesaj</div>
+            <div class="minik-s">🎬 <span id="canliOda">6</span> Oda</div>
+            <div class="minik-s" style="border-color: #ffb58b; color: #ffb58b;">
+                <span style="color: #ffb58b; animation: pulse 1.5s infinite;">●</span> Canlı Oda Sistemi
+            </div>
+        </div>
+
         <div class="kapak-icerik">
             <div class="kapak-etiket">🔥 Film keyfi burada başlar</div>
             <h1>Filmizleplusx ile film dünyasına gir</h1>
             <p>Kategorileri keşfet, popüler filmleri incele, odalara katıl ve arkadaşlarınla birlikte keyifli vakit geçir.</p>
 
             <div class="kapak-butonlar">
-    <a href="rooms.html" class="kapak-buton ilk">💬 Online Odaya Gir</a>
-    <a href="#filmler" class="kapak-buton ikinci">🎞️ Filmlere Git</a>
-    <button onclick="filmOner()" class="kapak-buton ilk" style="border:none; cursor:pointer;">🎬 Bugün Ne İzlesem?</button>
-</div>
+                <a href="rooms.html" class="kapak-buton ilk">💬 Online Odaya Gir</a>
+                <a href="#filmler" class="kapak-buton ikinci">🎞️ Filmlere Git</a>
+                <button onclick="filmOner()" class="kapak-buton ilk" style="border:none; cursor:pointer;">🎬 Bugün Ne İzlesem?</button>
+            </div>
 
-<div id="oner-sonuc" style="margin-top:14px; font-size:18px; color:#ffe0a8; font-weight:bold;"></div>    </div>
+            <!-- YAN YANA 4'LÜ KUTULAR -->
+            <div class="ek-ozellikler-yeni">
+                <div class="ozellik-kart-yeni">
+                    <h4>🤩 Mutluluk Butonu</h4>
+                    <button class="btn-pembe" onclick="mutluluk()">Keyfimi Yerine Getir</button>
+                    <p id="mutluSonuc" style="margin-top:10px; font-size:13px; color:#ffe0a8; min-height:20px;"></p>
+                </div>
 
-</div>
+                <div class="ozellik-kart-yeni">
+                    <h4>🌙 RÜYA Yorumla</h4>
+                    <input type="text" id="ruyaInput" placeholder="Rüyanı yaz..." style="width:100%; padding:8px; border-radius:8px; border:none; background:rgba(255,255,255,0.1); color:white; margin-bottom:8px;">
+                    <button class="btn-mavi" onclick="ruyaYorumla()">Yorumla</button>
+                    <p id="ruyaSonuc" style="margin-top:10px; font-size:13px; color:#ffe0a8; min-height:20px;"></p>
+                </div>
 
-<div class="hero">
-    <div class="hero-bilgi">
-        🔥 Şu an <span id="onlineSayi">12</span> kişi online
-        &nbsp;&nbsp; 💬 <span id="mesajSayi">128</span> mesaj atıldı
-        &nbsp;&nbsp; 🎬 <span id="odaSayi">5</span> aktif oda
-    </div>
-</div>
+                <div class="ozellik-kart-yeni">
+                    <h4>🎭 Bugün Hangi Karakterdin?</h4>
+                    <div style="height:45px"></div>
+                    <button class="btn-mor" onclick="sans()">Öğren</button>
+                    <p id="sansSonuc" style="margin-top:10px; font-size:13px; color:#ffe0a8; min-height:20px;"></p>
+                </div>
+
+                <div class="ozellik-kart-yeni">
+                    <h4>📊 Biliyor muydun?</h4>
+                    <div style="height:45px"></div>
+                    <button class="btn-yesil" onclick="bilgi()">Göster</button>
+                    <p id="bilgiSonuc" style="margin-top:10px; font-size:13px; color:#ffe0a8; min-height:20px;"></p>
+                </div>
+            </div> <!-- ek-ozellikler-yeni sonu -->
+        </div> <!-- kapak-icerik sonu -->
+    </div> <!-- kapak sonu -->
+</div> <!-- kapak-alan sonu -->
 
 <div class="arama-alani">
     <input type="text" id="aramaInput" placeholder="Film veya kategori ara..." onkeyup="filmleriAra()">
@@ -854,23 +1000,6 @@ body{
 
 <div class="online-buton-alan">
     <a href="rooms.html" class="online-buton">💬 Online Odaya Gir</a>
-</div>
-
-<div class="sayaclar">
-    <div class="sayac-kutu">
-        <div class="sayac-sayi" id="toplamFilm">0</div>
-        <div class="sayac-yazi">Toplam Film</div>
-    </div>
-
-    <div class="sayac-kutu">
-        <div class="sayac-sayi" id="kategoriSayisi">0</div>
-        <div class="sayac-yazi">Kategori</div>
-    </div>
-
-    <div class="sayac-kutu">
-        <div class="sayac-sayi">Canlı</div>
-        <div class="sayac-yazi">Online Oda Sistemi</div>
-    </div>
 </div>
 
 <script src="filmler.js"></script>
@@ -884,19 +1013,68 @@ if (typeof FILMLER !== "undefined") {
 }
 </script>
 
-<div class="baslik">🎭 Kategoriler</div>
+        </div>
+</div>
+
+<script>
+function mutluluk(){
+    const sozler = [
+        "Bugün o kadar iyisin ki güneş bile seni kıskanıyor 😎",
+        "Sen bu hayatın başrolüsün 🎬",
+        "Bugün şans senden yana 🍀",
+        "Aynaya bak… efsane görüyorsun 😏"
+    ];
+    document.getElementById("mutluSonuc").innerText = sozler[Math.floor(Math.random()*sozler.length)];
+}
+
+function ruyaYorumla(){
+    const yorumlar = [
+        "Rüyan aksiyon dolu bir filme dönüşüyor 😎",
+        "Bu rüya büyük bir değişimin habercisi 🔥",
+        "Kafanı karıştıran şeyler yakında netleşecek 🎯"
+    ];
+    document.getElementById("ruyaSonuc").innerText = yorumlar[Math.floor(Math.random()*yorumlar.length)];
+}
+
+function sans(){
+    const sonuclar = [
+        "Bugün John Wick gibisin 🔫",
+        "Bugün Joker gibi kaotiksin 🤡",
+        "Bugün Tony Stark gibi zekisin 🧠"
+    ];
+    document.getElementById("sansSonuc").innerText = sonuclar[Math.floor(Math.random()*sonuclar.length)];
+}
+
+function bilgi(){
+    const bilgiler = [
+        "Titanic çizimini aslında James Cameron yaptı 🎨",
+        "Matrix’teki yeşil kod sushi tariflerinden alınmıştır 🍣",
+        "Joker rolü Heath Ledger’a Oscar kazandırdı 🏆"
+    ];
+    document.getElementById("bilgiSonuc").innerText = bilgiler[Math.floor(Math.random()*bilgiler.length)];
+}
+</script>
+
+
+
 
 <div class="kategoriler">
-
-    <a href="yeni.html" class="kategori arama-ogesi yeni-kutu" style="position:relative;" data-ara="yeni filmler yeni eklenenler">
-    <span style="position:absolute; top:8px; right:8px; background:red; color:white; font-size:10px; padding:2px 6px; border-radius:5px;">
-        NEW
-    </span>
+    <a href="yeni.html" class="kategori" style="background:linear-gradient(135deg,#00c6ff,#0072ff); position:relative;">
     <div class="ikon">🆕</div>
-    <div class="ad">Yeni Eklenenler 🔥</div>
-    <div class="yazi">Son eklenen filmler</div>
-</a>
+    <div class="ad">Yeni Eklenenler</div>
+    <div class="yazi" style="font-size:16px;">🔥 Vizyona girecek ve yeni çıkan filmleri keşfet</div>
 
+    <span style="
+        position:absolute;
+        top:10px;
+        right:10px;
+        background:red;
+        padding:4px 8px;
+        border-radius:10px;
+        font-size:11px;
+        font-weight:bold;
+    ">NEW</span>
+</a>
     <a href="korku.html" class="kategori korku arama-ogesi" data-ara="korku gerilim korku filmleri conjuring nun it insidious">
         <div class="ikon">👻</div>
         <div class="ad">Korku</div>
@@ -937,6 +1115,10 @@ if (typeof FILMLER !== "undefined") {
     <div class="ad">Araçlar</div>
     <div class="yazi">Film araçları, öneriler, sağlık, şiir… aradığın her şey burada</div>
 </a>
+</div>
+<div id="sonEklenenKisaAlan" style="display:none; max-width:1000px; margin:25px auto 10px; padding:0 20px;">
+    <div class="baslik">🆕 🔥 Şu An Trend Fragmanlar</div>
+    <div id="sonEklenenKisaGrid" class="filmler"></div>
 </div>
 
 <div class="baslik" id="filmler">🎟️ Popüler Filmler</div>
@@ -1274,7 +1456,7 @@ function panelFilmleriniGoster(){
             alan.style.padding = "0 20px 40px";
 
             alan.innerHTML = `
-                <div class="baslik" id="yeni">🆕 Yeni Eklenenler</div>
+                <div class="baslik">🆕 Yeni Eklenenler</div>
                 <div id="panelFilmGrid" class="filmler"></div>
             `;
 
@@ -1360,6 +1542,132 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+</script>
+<script>
+function anaSayfaSon3FilmGoster(){
+    const alan = document.getElementById("sonEklenenKisaAlan");
+    const grid = document.getElementById("sonEklenenKisaGrid");
+
+    if(!alan || !grid) return;
+
+    db.collection("filmler")
+    .orderBy("tarih", "desc")
+    .limit(3)
+    .get()
+    .then((snapshot) => {
+
+        if(snapshot.empty){
+            alan.style.display = "none";
+            return;
+        }
+
+        grid.innerHTML = "";
+        alan.style.display = "block";
+
+        snapshot.forEach((doc) => {
+            const film = doc.data();
+
+            grid.innerHTML += `
+                <div class="film">
+                    <img src="${film.afis || ""}">
+                    <h3>${film.isim || "Film"}</h3>
+                    <div class="film-bilgi">${film.tur || ""} ${film.yil ? "• " + film.yil : ""}</div>
+                    <a href="film-detay.html?id=${film.id}">🎬 Fragmanı İzle</a>
+                </div>
+            `;
+        });
+
+    })
+    .catch((error) => {
+        console.log("Hata:", error);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+    setTimeout(anaSayfaSon3FilmGoster, 500);
+});
+</script>
+
+<script>
+function mutluluk(){
+    const sozler = [
+        "Bugün o kadar iyisin ki güneş bile seni kıskanıyor 😎",
+        "Sen bu hayatın başrolüsün, figüranlara takılma! 🎬",
+        "Bugün şans senden yana, bilet alsan kesin tutar 🍀",
+        "Aynaya bak… Hayatında göreceğin en efsane kişiyi göreceksin 😏",
+        "Gülüşünle karanlık odaları bile aydınlatıyorsun, sakın bozma! ✨",
+        "Dünya senin etrafında dönmüyor olabilir ama bugün sahne senin 🎭",
+        "Her şey üstüne geliyorsa unutma; uçak rüzgara karşı yükselir ✈️",
+        "Bugün senin günün, enerjinle herkesi büyüleyeceksin ⚡",
+        "Mutluluk bir seçimdir ve sen bugün doğru seçimi yaptın 🌈",
+        "Senin gibi biri varken bu dünyanın mutsuz olma ihtimali yok! 🔥"
+    ];
+    document.getElementById("mutluSonuc").innerText = sozler[Math.floor(Math.random()*sozler.length)];
+}
+
+function ruyaYorumla(){
+    const yorumlar = [
+        "Rüyan aksiyon dolu bir filme dönüşüyor, yakında macera başlıyor 😎",
+        "Bu rüya büyük bir değişimin habercisi, hazırlıklı ol 🔥",
+        "Kafanı karıştıran tüm o karmaşık şeyler yakında netleşecek 🎯",
+        "Rüyanda gördüğün o kişi, seni gerçekten de düşünüyor olabilir 💭",
+        "Bilinçaltın sana 'biraz dinlen' diyor, kendine vakit ayır ☕",
+        "Eski bir dosttan alacağın haber seni çok şaşırtacak 📞",
+        "Rüyanın derinliği, yaratıcılığının zirvede olduğunu gösteriyor 🎨",
+        "Huzurlu bir döneme giriyorsun, fırtına dindi 🌊",
+        "Beklediğin o fırsat, kapını çalmak üzere, gözünü dört aç 🚪",
+        "Rüyan aslında bir uyarı; küçük detaylara dikkat etmelisin 🧐"
+    ];
+    document.getElementById("ruyaSonuc").innerText = yorumlar[Math.floor(Math.random()*yorumlar.length)];
+}
+
+function sans(){
+    const sonuclar = [
+        "Bugün John Wick gibisin; kimse yoluna çıkmasın! 🔫",
+        "Bugün Joker gibi kaotik ve durdurulamazsın 🤡",
+        "Bugün Tony Stark gibi zeki ve teknoloji dolusun 🧠",
+        "Bugün Batman gibisin; adaletin karanlık temsilcisisin 🦇",
+        "Bugün Deadpool gibisin; espri yeteneğin tavan yaptı ⚔️",
+        "Bugün Harry Potter gibisin; sihrin her yerde ✨",
+        "Bugün Jack Sparrow gibisin; rüzgar seni nereye götürürse ⚓",
+        "Bugün Spider-Man gibisin; sorumlulukların seni bekliyor 🕷️",
+        "Bugün Katniss Everdeen gibisin; hedefin tam isabet 🏹",
+        "Bugün James Bond gibisin; şık ve gizemli 😏"
+    ];
+    document.getElementById("sansSonuc").innerText = sonuclar[Math.floor(Math.random()*sonuclar.length)];
+}
+
+function bilgi(){
+    const bilgiler = [
+        "Titanic çizimini aslında yönetmen James Cameron yaptı 🎨",
+        "Matrix’teki yeşil kod sushi tariflerinden alınmıştır 🍣",
+        "Joker rolü Heath Ledger’a vefatından sonra Oscar kazandırdı 🏆",
+        "Aslan Kral'daki kükremeler aslında kaplan sesidir 🦁",
+        "Interstellar’daki 'su gezegeni' sahneleri gerçek bir gölde çekildi 🌊",
+        "Terminatör senaryosu James Cameron'ın gördüğü bir kabustan doğdu 🤖",
+        "Pulp Fiction'daki çanta içinde ne olduğu asla açıklanmadı 💼",
+        "Shrek karakteri aslında yaşamış bir güreşçiden esinlenilmiştir 👹",
+        "Scream filmindeki maske, gerçek bir hayalet tablosundan alınmıştır 😱",
+        "Yüzüklerin Efendisi setinde binlerce el yapımı zırh üretildi ⚔️"
+    ];
+    document.getElementById("bilgiSonuc").innerText = bilgiler[Math.floor(Math.random()*bilgiler.length)];
+}
+function canliSayacGuncelle() {
+    // Online Kişi: 110-160 arası
+    if(document.getElementById("canliIzleyici")) {
+        document.getElementById("canliIzleyici").innerText = Math.floor(Math.random() * (160 - 110 + 1)) + 110;
+    }
+    // Mesaj Sayısı: 310-480 arası
+    if(document.getElementById("canliMesaj")) {
+        document.getElementById("canliMesaj").innerText = Math.floor(Math.random() * (480 - 310 + 1)) + 310;
+    }
+    // Oda Sayısı: 5-12 arası
+    if(document.getElementById("canliOda")) {
+        document.getElementById("canliOda").innerText = Math.floor(Math.random() * (12 - 5 + 1)) + 5;
+    }
+}
+setInterval(canliSayacGuncelle, 4000);
+canliSayacGuncelle();
 </script>
 
 </body>
