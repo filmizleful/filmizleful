@@ -103,7 +103,7 @@
 
         <div class="satir">
           <label>Film Adı</label>
-          <input type="text" id="filmIsim" placeholder="Film adı">
+          <input type="text" id="filmIsim" placeholder="Film adı" onchange="filmBilgisiGetir()">
         </div>
 
         <div class="satir">
@@ -170,6 +170,38 @@
   <script>
     const FILM_KEY = "panelFilmler";
     let duzenlenenFilmId = null;
+const TMDB_API = "045eb227b2176018bfb8a2603854f3e0";
+
+async function filmBilgisiGetir() {
+    const isim = document.getElementById("filmIsim").value.trim();
+    if(!isim) return;
+
+    const url = `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API}&query=${encodeURIComponent(isim)}&language=tr-TR`;
+
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if(data.results.length === 0){
+            alert("Film bulunamadı");
+            return;
+        }
+
+        const film = data.results[0];
+
+        document.getElementById("filmYil").value = film.release_date ? film.release_date.split("-")[0] : "";
+        document.getElementById("filmPuan").value = film.vote_average || "";
+        document.getElementById("filmOzet").value = film.overview || "";
+
+        if(film.poster_path){
+            document.getElementById("filmAfis").value = "https://image.tmdb.org/t/p/w500" + film.poster_path;
+        }
+
+    } catch(e){
+        console.log(e);
+        alert("Hata oluştu");
+    }
+}
 
     const filmIdInput = document.getElementById("filmId");
     const filmIsimInput = document.getElementById("filmIsim");
