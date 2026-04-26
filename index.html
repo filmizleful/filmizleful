@@ -1529,6 +1529,7 @@ document.addEventListener("DOMContentLoaded", function(){
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
     if(!alan || !grid) return;
 
@@ -1546,6 +1547,21 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+const rtdb = firebase.database();
+
+const aktifRef = rtdb.ref("aktifKullanicilar");
+
+// kullanıcı girince ekle
+const kullanici = aktifRef.push(true);
+
+// çıkınca sil
+kullanici.onDisconnect().remove();
+
+// canlı sayı
+aktifRef.on("value", (snapshot) => {
+  const sayi = snapshot.numChildren();
+  document.getElementById("canliSayi").innerText = sayi;
+});
 </script>
 <script>
 function anaSayfaTrendFilmler(){
@@ -1670,22 +1686,57 @@ function bilgi(){
     ];
     document.getElementById("bilgiSonuc").innerText = bilgiler[Math.floor(Math.random()*bilgiler.length)];
 }
-function canliSayacGuncelle() {
-    // Online Kişi: 110-160 arası
-    if(document.getElementById("canliIzleyici")) {
-        document.getElementById("canliIzleyici").innerText = Math.floor(Math.random() * (160 - 110 + 1)) + 110;
-    }
-    // Mesaj Sayısı: 310-480 arası
-    if(document.getElementById("canliMesaj")) {
-        document.getElementById("canliMesaj").innerText = Math.floor(Math.random() * (480 - 310 + 1)) + 310;
-    }
-    // Oda Sayısı: 5-12 arası
-    if(document.getElementById("canliOda")) {
-        document.getElementById("canliOda").innerText = Math.floor(Math.random() * (12 - 5 + 1)) + 5;
-    }
-}
-setInterval(canliSayacGuncelle, 4000);
-canliSayacGuncelle();
+<!-- Firebase Scriptleri -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<script>
+// SENİN Firebase Config (aynı kalacak)
+const firebaseConfig = {
+  apiKey: "AIzaSyBmSzMlnTX94BKdUuHDPiVRqwu8of1RqHw",
+  authDomain: "filmizleplusx.firebaseapp.com",
+  projectId: "filmizleplusx",
+  storageBucket: "filmizleplusx.firebasestorage.app",
+  messagingSenderId: "296091084316",
+  appId: "1:296091084316:web:aba2def23f6ce2b03761d9"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// 🔥 CANLI KULLANICI
+const rtdb = firebase.database();
+const aktifRef = rtdb.ref("aktifKullanicilar");
+
+// kullanıcı ekle
+const kullanici = aktifRef.push(true);
+
+// çıkınca sil
+kullanici.onDisconnect().remove();
+
+// canlı sayı
+aktifRef.on("value", (snapshot) => {
+  const sayi = snapshot.numChildren();
+  const el = document.getElementById("canliSayi");
+  if(el) el.innerText = sayi;
+});
+</script>
+
+<!-- SAĞ ALTTA GÖSTER -->
+<div style="
+position:fixed;
+bottom:20px;
+right:20px;
+background:#111;
+color:#fff;
+padding:10px 15px;
+border-radius:10px;
+font-size:14px;
+z-index:9999;
+">
+👁️ Şu an <span id="canliSayi">0</span> kişi sitede
+</div>
 </script>
 
 </body>
