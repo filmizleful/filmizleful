@@ -105,6 +105,10 @@
           <label>Film Adı</label>
           <input type="text" id="filmIsim" placeholder="Film adı" onchange="filmBilgisiGetir()">
         </div>
+<div class="satir">
+  <label>Resim URL</label>
+  <input type="text" id="afis" placeholder="Poster veya görsel linki">
+</div>
 
         <div class="satir">
           <label>Tür</label>
@@ -288,7 +292,8 @@ async function filmBilgisiGetir() {
       const tur = filmTurInput.value.toLowerCase().trim();
       const yil = filmYilInput.value.trim();
       const puan = filmPuanInput.value.trim();
-      const afis = filmAfisInput.value.trim();
+      const manuelResim = document.getElementById("afis").value.trim();
+const afis = manuelResim || filmAfisInput.value.trim();
       const fragman = filmFragmanInput.value.trim();
       const ozet = filmOzetInput.value.trim();
       const hakkinda1 = filmHakkinda1Input.value.trim();
