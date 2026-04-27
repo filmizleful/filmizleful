@@ -3,7 +3,6 @@
 
   <!-- ANA SAYFALAR -->
   <url><loc>https://filmizleplusx.com/</loc></url>
-  <url><loc>https://filmizleplusx.com/index.html</loc></url>
   <url><loc>https://filmizleplusx.com/yeni.html</loc></url>
   <url><loc>https://filmizleplusx.com/aksiyon.html</loc></url>
   <url><loc>https://filmizleplusx.com/korku.html</loc></url>
@@ -75,6 +74,8 @@
   <url><loc>https://filmizleplusx.com/film-detay.html?id=shrek</loc></url>
   <url><loc>https://filmizleplusx.com/film-detay.html?id=cars</loc></url>
   <url><loc>https://filmizleplusx.com/film-detay.html?id=frozen</loc></url>
-  <url><loc>https://filmizleplusx.com/film-detay.html?id=johnwick1</loc></url>
+
+  <!-- PANELDEN EKLENEN FİLMLER -->
+  
 
 </urlset>
