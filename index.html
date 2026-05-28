@@ -1212,7 +1212,7 @@ function bilgi(){
         <h3>The Conjuring</h3>
         <div class="film-bilgi">Korku • 2013</div>
         <div class="film-puan">⭐ IMDb 7.5</div>
-        <a href="film-detay.html?id=conjuring"Fragman</a>
+        <a href="film-detay.html?id=conjuring">Fragmanı İzle</a>
         <button class="favori-buton" onclick="event.stopPropagation(); favoriEkle(this,'conjuring','The Conjuring','Korku • 2013','https://image.tmdb.org/t/p/w500/wVYREutTvI2tmxr6ujrHT704wGF.jpg')">❤️ Favoriye Ekle</button>
     </div>
 
@@ -1221,7 +1221,7 @@ function bilgi(){
         <h3>Avatar</h3>
         <div class="film-bilgi">Macera • 2009</div>
         <div class="film-puan">⭐ IMDb 7.9</div>
-        <a href="film-detay.html?id=avatar">>Fragman Fragman İzle<</a>
+        <a href="film-detay.html?id=avatar">Fragmanı İzle</a>
         <button class="favori-buton" onclick="event.stopPropagation(); favoriEkle(this,'avatar','Avatar','Macera • 2009','https://image.tmdb.org/t/p/w500/kyeqWdyUXW608qlYkRqosgbbJyK.jpg')">❤️ Favoriye Ekle</button>
     </div>
 </div>
@@ -1541,7 +1541,7 @@ function panelFilmleriniGoster(){
                     <h3>${film.isim || "Adsız Film"}</h3>
                     <div class="film-bilgi">${film.tur || "Film"}${film.yil ? " • " + film.yil : ""}</div>
                     <div class="film-puan">⭐ Yeni Eklendi</div>
-                    <a href="film-detay.html?id=${encodeURIComponent(film.id || "")}">Fragman İzle</a>
+                    <a href="film-detay.html?id=${encodeURIComponent(film.id || "")}">İzle</a>
                 `;
 
                 grid.appendChild(kart);
